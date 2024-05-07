@@ -1,0 +1,80 @@
+<div class="product-container">
+  <div class="section-heading">Product Information</div>
+  <div class="product-details">
+      <!-- Title -->
+      <div class="detail-item">
+          <input type="text" class="detail-input" placeholder="Title">
+      </div>
+      <!-- Description -->
+      <div class="detail-item">
+          <input type="text" class="detail-input" placeholder="Description">
+      <!-- Category -->
+      <div class="detail-item">
+        <div class="detail-label">Choose Category</div>
+        <div class="category-dropdown">
+            <select class="category-select">
+                <option *ngFor="let category of categories" [value]="category.value">
+                    {{ category.label }}
+                  </option>
+            </select>
+        </div>
+      </div>
+      <!-- Date -->
+      <div class="detail-item">
+          <input type="date" class="date-input">
+      </div>
+      <!-- Condition -->
+      <div class="detail-item">
+          <div class="detail-label">Condition</div>
+          <div class="condition-dropdown">
+              <select class="condition-select">
+                  <option value="Excellent">Excellent</option>
+                  <option value="Very Good">Very Good</option>
+                  <option value="Good">Good</option>
+                  <option value="Fair">Fair</option>
+                  <option value="Poor">Poor</option>
+              </select>
+          </div>
+      </div>
+      <!-- Set a Price -->
+      <div class="detail-item">
+          <input type="number" class="detail-input" placeholder="Set a Price">
+      </div>
+      <!-- Location -->
+      <div class="detail-item">
+          <input type="text" class="detail-input" placeholder="Location">
+      </div>
+      </div>
+  </div>
+  <!-- File Upload -->
+  <div class="file-upload" id="fileUpload">
+      <app-file-upload></app-file-upload>
+  </div>
+  <!-- Share Contact Details -->
+  <div class="toggle-option">
+      <div class="option-label">Share Contact Details</div>
+      <label class="toggle-switch">
+          <input type="checkbox" class="toggle-checkbox">
+          <span class="slider"></span>
+      </label>
+  </div>
+  <!-- Allow to Chat -->
+  <div class="toggle-option">
+      <div class="option-label">Allow to Chat</div>
+      <label class="toggle-switch">
+          <input type="checkbox" class="toggle-checkbox">
+          <span class="slider"></span>
+      </label>
+  </div>
+  <!-- Allow to Offer -->
+  <div class="toggle-option">
+      <div class="option-label">Allow to Offer</div>
+      <label class="toggle-switch">
+          <input type="checkbox" class="toggle-checkbox">
+          <span class="slider"></span>
+      </label>
+  </div>
+
+  <!-- List Now Button -->
+  <button class="list-now-button">List Now</button>
+</div>

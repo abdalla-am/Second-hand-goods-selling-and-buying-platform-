@@ -1,0 +1,217 @@
+/* Product Container */
+.product-container {
+  margin: 10px;
+  background-color: #f9f9f9;
+  padding-top: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Heading */
+.section-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Product Details */
+.product-details {
+  margin-bottom: 20px;
+}
+
+/* Detail Item */
+.detail-item {
+  margin-bottom: 10px;
+}
+
+/* Detail Label */
+.detail-label {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Detail Input */
+.detail-input,
+.date-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Rounded shape */
+  font-size: 16px;
+  outline: none;
+}
+/* Condition Dropdown */
+.category-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.category-select {
+  width: 100%;
+  padding: 10px 30px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Rounded shape */
+  font-size: 16px;
+  appearance: none; /* Remove default arrow */
+  background-color: transparent;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 16 16"><path d="M8 12.5a.8.8 0 01-.57-.236L1.17 6.425a.75.75 0 011.057-1.05l5.107 5.11 5.106-5.11a.75.75 0 011.057 1.05l-6.26 6.26A.8.8 0 018 12.5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 16px;
+}
+/* Condition Dropdown */
+.condition-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.condition-select {
+  width: 100%;
+  padding: 10px 30px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Rounded shape */
+  font-size: 16px;
+  appearance: none; /* Remove default arrow */
+  background-color: transparent;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 16 16"><path d="M8 12.5a.8.8 0 01-.57-.236L1.17 6.425a.75.75 0 011.057-1.05l5.107 5.11 5.106-5.11a.75.75 0 011.057 1.05l-6.26 6.26A.8.8 0 018 12.5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 16px;
+}
+
+/* Custom arrow icon */
+.condition-select::-ms-expand {
+  display: none;
+}
+
+/* Styling the dropdown arrow */
+.condition-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333; /* Change the color of the arrow */
+}
+
+/* File Upload */
+.file-upload {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+
+}
+
+/* File Upload Label */
+.file-upload-label {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* File Input */
+.file-input {
+  display: none;
+}
+
+/* Upload Button */
+.upload-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload-button:hover {
+  background-color: #0056b3;
+}
+
+/* Toggle Option Container */
+.toggle-option {
+  display: flex; /* Use flexbox */
+  align-items: center; /* Align items vertically */
+  margin-bottom: 10px;
+}
+
+/* Option Label */
+.option-label {
+  font-size: 18px;
+  color: #555;
+  margin-right: 10px; /* Add some spacing between label and toggle switch */
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: auto; /* Push the toggle switch to the right */
+}
+
+
+/* Toggle Checkbox */
+.toggle-checkbox {
+  display: none;
+}
+
+/* Slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+}
+
+/* Slider: Before */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+/* Checkbox: Checked */
+.toggle-checkbox:checked + .slider {
+  background-color: #2196F3;
+}
+
+/* Checkbox: Checked + Slider: Before */
+.toggle-checkbox:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* List Now Button */
+.list-now-button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.list-now-button:hover {
+  background-color: #218838;
+}

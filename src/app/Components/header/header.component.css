@@ -1,0 +1,32 @@
+.bg-custom-color {
+    background-color: #1B6392;
+}
+.navbar-brand {
+    font-size: 30px; /* Adjust the font size as needed */
+    padding: 0; /* Remove any default padding */
+    margin-right: 15px; /* Add some margin to the right to separate from other elements */
+}
+.nav-item{
+    font-size: 20px;
+}
+.navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:active {
+        color:#E0EDFF;
+    }
+    .navbar-nav .profile-icon {
+        display: flex;
+        align-items: center;
+    }
+.btn-style{
+        float: left;
+        width: 15%;
+        background: #ffffff;
+        border: 1px solid rgb(255, 255, 255);
+        border-left: none;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+.search-input {
+        width: 200px; /* Increase the width of the search box */
+        /* Add margin to create space between the search box and profile icon */
+    }

@@ -1,0 +1,22 @@
+.signup-section {
+    display: inline-block;
+    width: 500px;
+    word-break: break-word;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 128px;
+    background: linear-gradient(180deg, #4913E4, #3A0FB5, #290A7E);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.blue-text {
+    color: blue;
+}
+.btn-style{
+    background-color: #1436EE;
+    color: white;
+    width: 303px;
+    height: 65px;
+
+}

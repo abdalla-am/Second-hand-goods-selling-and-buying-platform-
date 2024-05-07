@@ -1,0 +1,41 @@
+<div class="ads-filter">
+  <div class="search-bar">
+    <input type="text" placeholder="Search...">
+    <button><i class="fas fa-search"></i></button>
+  </div>
+  <div class="filter-options">
+    <select class="">
+      <option *ngFor="let category of categories" [value]="category.value">
+        {{ category.label }}
+      </option>
+    </select>
+    <!-- Add other filter options -->
+  </div>
+</div>
+
+<div class="ads-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.name }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.price }}</td>
+        <td [ngStyle]="{'color' : item.status === 'Active' ? 'green' : 'red' }">{{ item.status }}</td>
+        <td>
+          <button (click)="toggleFavorite(item.name)">
+            <i class="fas fa-heart" [class.filled]="favorites.includes(item.name)"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

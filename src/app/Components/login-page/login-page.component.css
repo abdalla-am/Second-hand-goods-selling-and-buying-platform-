@@ -1,0 +1,101 @@
+.login-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Inter';
+  }
+  .background-image {
+    background-image: url('../../../assets/Login/image 1.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 20px;
+    width: 800px;
+    height: 500px;
+  }
+  .login-form {
+    justify-content: center;
+    width: 100%; /* Adjust width as needed */
+    max-width: 400px; /* Adjust max-width as needed */
+    padding: 20px;
+    border: none;
+    background-color: transparent;
+
+  }
+  
+  .login-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #290A7E;
+  }
+  
+  .login-subtitle {
+    font-size: 18px;
+    font-weight: 300;
+    color: #000000;
+  }
+  
+  .input-section {
+    margin-top: 20px;
+  }
+  
+  .input-wrapper {
+    margin-bottom: 15px;
+  }
+  
+  .input-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .input-field input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgba(46, 46, 46, 0.41);
+    
+    border-radius: 5px;
+    background-color: transparent; /* Add background color to input */
+    color: #5d5d5d;
+
+  }
+  
+  .login-button-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .login-button {
+    width: 100px;
+    height: 51px;
+    padding: 10px 20px;
+    border: 1px solid #1436EE; /* Add border to button */
+    border-radius: 5px;
+    background-color: #1436EE;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .login-button a{
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .login-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .forgot-password-link {
+    font-size: 20px;
+    color: #1436EE;
+    cursor: pointer;
+  }
+  
+  .forgot-password-link:hover {
+    text-decoration: underline;
+  }

@@ -1,0 +1,21 @@
+<div class="BasicLayout">
+    <div class="container">
+      <aside class="sidebar">
+        <div class="profile-section">
+          <img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
+          <h2>Abdalla Ayman</h2>
+          <p>Member</p>
+        </div>
+        <div class="menu">
+          <a (click)="loadComponent('DashboardComponent')" class="menu-item">Overview</a>
+          <a (click)="loadComponent('GeneratePostComponent')" class="menu-item">Post Ads</a>
+          <a (click)="loadComponent('UserAdsComponent')" class="menu-item">My Ads</a>
+          <a (click)="loadComponent('FavouriteAdsComponent')" class="menu-item active">Favourite Ads</a>
+          <a (click)="loadComponent('MessagesComponent')" class="menu-item">Messages</a>
+          <a (click)="loadComponent('EditProfileComponent')" class="menu-item">Account Settings</a>
+          <a (click)="loadComponent('HomeComponent')" class="menu-item">Sign Out</a>
+      </div>
+      <div #dynamicComponentContainer></div>      
+      </aside>
+    </div>
+</div>  

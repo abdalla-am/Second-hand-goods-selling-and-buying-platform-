@@ -1,0 +1,40 @@
+/* File Upload */
+.file-upload {
+    margin-bottom: 20px;
+  }
+  
+  .file-upload-label {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    border: 2px dashed #ccc; /* Dashed border style */
+    padding: 20px; /* Add padding for better spacing */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    width: 1000px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+  }
+  
+  .file-upload-label i {
+    margin-right: 10px; /* Add spacing between the icon and text */
+  }
+  
+  .file-input {
+    display: none; /* Hide the file input */
+  }
+  
+  
+  /* Upload Button */
+  .upload-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .upload-button:hover {
+    background-color: #0056b3;
+  }
+  

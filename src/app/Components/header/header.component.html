@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg bg-custom-color">
+    <div class="container-fluid">
+        <div class="navbar-collapse">
+            <div class="row w-100">
+                <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                    <a class="navbar-brand fw-bold" href="#">Second Hand</a>
+                </div>
+                <div class="col-lg-4 d-flex justify-content-center">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" onclick="HideSidebat()">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="HideSidebat()">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"onclick="HideSidebat()">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Login"onclick="HideSidebat()">Login</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 d-flex justify-content-end align-items-center">
+                    <form class="d-flex" role="search">
+                        <div class="input-group">
+                            <input class="form-control search-input" type="search" placeholder="What are you looking for?" aria-label="Search">
+                                <button class="btn btn-style" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                        </div>
+                    </form>
+                    <a class="nav-link profile-icon" (click)="toggleSidebar()">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

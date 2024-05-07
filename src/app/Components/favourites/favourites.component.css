@@ -1,0 +1,68 @@
+.ads-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input[type="text"] {
+  padding: 8px;
+  border: 1px solid #EBEEF7;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  background-color: #00AAFF;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filter-options select {
+  padding: 8px;
+  border: 1px solid #EBEEF7;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.ads-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ads-table th, .ads-table td {
+  padding: 12px;
+  border-bottom: 1px solid #EBEEF7;
+  text-align: left;
+}
+
+.ads-table th {
+  background-color: #EBEEF7;
+  font-weight: bold;
+}
+
+.ads-table tbody tr:nth-child(even) {
+  background-color: #F7F8FC;
+}
+
+.ads-table tbody tr:hover {
+  background-color: #E8F7FF;
+}
+
+.ads-table button {
+  padding: 8px 16px;
+  background-color: #00AAFF;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

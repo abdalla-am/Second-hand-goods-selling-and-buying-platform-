@@ -1,0 +1,24 @@
+.page {
+  background-color: #E0EDFF;
+}
+
+.container {
+  display: flex;
+  margin: 0; /* Reset margin */
+  padding: 0;
+}
+
+.sidebar-container {
+  display: flex;
+  flex: 1; /* Occupy remaining vertical space */
+  flex-direction: row; /* Ensure items are laid out in a row */
+}
+
+.sidebar {
+  width: 30%; /* Set the width */
+  padding-top: 10px;
+}
+
+.main-content {
+  flex: 1; /* Occupy remaining space beside sidebar */
+}

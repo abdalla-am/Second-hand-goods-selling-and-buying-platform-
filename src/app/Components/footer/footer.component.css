@@ -1,0 +1,30 @@
+.footer {
+    display: flex;
+    background-color: #1B6392;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+.footer-section {
+    flex: 1;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 400;
+  }
+.footer-section span {
+    display: block;
+    margin-right: 10px; /* Add some spacing between elements */
+}
+.send-mail {
+    border-radius: 4px;
+    border: 1.5px solid #000000;
+    background-color: rgba(255, 255, 255, 0.275); /* Transparent background */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10.5px 0 10.5px 14.5px;
+    width: 318px;
+    box-sizing: border-box;
+  }
+  

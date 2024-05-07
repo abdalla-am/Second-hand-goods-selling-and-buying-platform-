@@ -1,0 +1,54 @@
+<div class="Myads-filter">
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="filter-options">
+        <select class="">
+            <option value="Mobiles">Mobiles</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Vehicles">Vehicles</option>
+            <option value="Properties">Properties</option>
+            <option value="Essentials">Essentials</option>
+            <option value="Home & Living">Home & Living</option>
+            <option value="Business Industry">Business Industry</option>
+            <option value="Education">Education</option>
+            <option value="Books">Books</option>
+            <option value="Fitness">Fitness</option>
+            <option value="Animals & Pets">Animals & Pets</option>
+        </select>
+      <!-- Add other filter options -->
+    </div>
+  </div>
+<div class="Myads-table">
+  <table>
+    <thead>
+      <tr>
+        <th>My Ads</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ad of ads">
+        <td>{{ ad.title }}</td>
+        <td>{{ ad.date }}</td>
+        <td>{{ ad.price }}</td>
+        <td>{{ ad.status }}</td>
+        <td class="Action">
+            <button (click)="editAd(ad)">Edit</button>
+          <div class="dropdown" (mouseenter)="toggleDropdown(ad, true)" (mouseleave)="toggleDropdown(ad, false)">
+            <button class="ellipsis-button">...</button>
+            <div class="dropdown-content" *ngIf="ad.showDropdown">
+              <button (click)="viewDetails(ad)">View Details</button>
+              <button (click)="makeExpire(ad)">Make it Expire</button>
+              <button (click)="deleteAd(ad)">Delete Ad</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

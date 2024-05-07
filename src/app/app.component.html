@@ -1,0 +1,18 @@
+<div class="page">
+    <app-header></app-header>
+    <ng-container *ngIf="showBreadcrumbAndSidebar; else noBreadcrumbAndSidebar">
+        <app-bread-crumb></app-bread-crumb>
+        <div class="container">
+            <div class="sidebar-container">
+                <app-sidebar class="sidebar"></app-sidebar>
+                <div class="main-content">
+                    <router-outlet></router-outlet> <!-- Router outlet for main content -->
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noBreadcrumbAndSidebar>
+        <router-outlet></router-outlet> <!-- Router outlet for main content -->
+    </ng-template>
+    <app-footer></app-footer>
+</div>
