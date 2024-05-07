@@ -17,6 +17,8 @@ import { BasicUserLayoutComponent } from './Components/basic-user-layout/basic-u
 import { BreadCrumbComponent } from './Components/bread-crumb/bread-crumb.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
+import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,11 +38,13 @@ import { FileUploadComponent } from './Components/file-upload/file-upload.compon
     BasicUserLayoutComponent,
     BreadCrumbComponent,
     SidebarComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule 
   ],
   providers: [
     provideClientHydration()

@@ -4,7 +4,7 @@
     <button><i class="fas fa-search"></i></button>
   </div>
   <div class="filter-options">
-    <select class="">
+    <select>
       <option *ngFor="let category of categories" [value]="category.value">
         {{ category.label }}
       </option>
@@ -32,8 +32,8 @@
         <td [ngStyle]="{'color' : item.status === 'Active' ? 'green' : 'red' }">{{ item.status }}</td>
         <td>
           <button (click)="toggleFavorite(item.name)">
-            <i class="fas fa-heart" [class.filled]="favorites.includes(item.name)"></i>
-          </button>
+            <i class="fas fa-heart"></i>
+          </button>          
         </td>
       </tr>
     </tbody>
