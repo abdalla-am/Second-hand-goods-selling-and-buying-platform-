@@ -19,6 +19,9 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
 import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
+
 
 
 @NgModule({
@@ -44,7 +47,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule ,
+    AngularFireModule.initializeApp(environment.firebase),
+
   ],
   providers: [
     provideClientHydration()
