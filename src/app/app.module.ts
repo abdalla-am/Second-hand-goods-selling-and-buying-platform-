@@ -13,7 +13,6 @@ import { FavouritesComponent } from './Components/favourites/favourites.componen
 import { GeneratePostComponent } from './Components/generate-post/generate-post.component';
 import { UserAdsComponent } from './Components/user-ads/user-ads.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
-import { BasicUserLayoutComponent } from './Components/basic-user-layout/basic-user-layout.component';
 import { BreadCrumbComponent } from './Components/bread-crumb/bread-crumb.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
@@ -38,7 +37,6 @@ import { environment } from '../environments/environment';
     GeneratePostComponent,
     UserAdsComponent,
     DashboardComponent,
-    BasicUserLayoutComponent,
     BreadCrumbComponent,
     SidebarComponent,
     FileUploadComponent,
@@ -48,8 +46,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     FormsModule ,
-    AngularFireModule.initializeApp(environment.firebase),
-
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     provideClientHydration()
