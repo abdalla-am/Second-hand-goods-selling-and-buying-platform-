@@ -7,7 +7,7 @@ import { AutheroizedUserService } from '../../Services/autheroized-user.service'
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  showSidebar = false;
+  showSidebar = true;
   constructor(private basiclayoutService: BasicLayoutService , Autheroizeduserservice : AutheroizedUserService) { }
   toggleSidebar() {
     this.basiclayoutService.toggleSidebar();

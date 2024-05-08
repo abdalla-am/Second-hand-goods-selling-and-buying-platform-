@@ -99,3 +99,10 @@
   .forgot-password-link:hover {
     text-decoration: underline;
   }
+  .error-message{
+    color: red;
+  }
+  .SignUp{
+    align-content: center;
+    margin: 20px;
+  }

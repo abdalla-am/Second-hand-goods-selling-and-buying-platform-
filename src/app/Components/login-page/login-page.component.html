@@ -1,3 +1,5 @@
+<!-- login.component.html -->
+
 <div class="login-container">
     <div class="background-image"></div>
     <div class="login-form">
@@ -5,17 +7,28 @@
             <div class="login-title">Log in to Second Hand</div>
             <span class="login-subtitle">Enter your details below</span>
         </div>
-        <div class="input-section">
-            <div class="input-wrapper">
-                <div class="input-field"><input type="text" id="email" name="email" placeholder="Enter your email or phone number"></div>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <div class="input-section">
+                <div class="input-wrapper">
+                    <div class="input-field">
+                        <div class="error-message" *ngIf="loginError">Incorrect email or password. Please try again.</div>
+                        <input type="text" id="email" name="email" placeholder="Enter your email or phone number" ngModel required>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <div class="input-field">
+                        <input type="password" id="password" name="password" placeholder="Enter your password" ngModel required>
+                    </div>
+                </div>
             </div>
-            <div class="input-wrapper">
-                <div class="input-field"><input type="password" id="password" name="password" placeholder="Enter your password"></div>
+            <div class="login-button-section">
+                <button type="submit" class="login-button">Log In</button>
+                <span class="forgot-password-link">Forget Password?</span>
             </div>
-        </div>
-        <div class="login-button-section">
-            <button class="login-button"> <a href="">Log In</a></button>
-            <span class="forgot-password-link">Forget Password?</span>
-        </div>
+            <div class="login-button-section">
+                <span class="SignUp">Don't have an account? <a href="/SignUp">Sign Up</a></span>
+                
+            </div>
+        </form>
     </div>
 </div>
