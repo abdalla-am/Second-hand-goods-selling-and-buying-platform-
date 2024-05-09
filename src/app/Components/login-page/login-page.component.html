@@ -7,22 +7,22 @@
             <div class="login-title">Log in to Second Hand</div>
             <span class="login-subtitle">Enter your details below</span>
         </div>
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <form #loginForm="ngForm" >
             <div class="input-section">
                 <div class="input-wrapper">
                     <div class="input-field">
-                        <div class="error-message" *ngIf="loginError">Incorrect email or password. Please try again.</div>
-                        <input type="text" id="email" name="email" placeholder="Enter your email or phone number" ngModel required>
+                        <div class="error-message">Incorrect email or password. Please try again.</div>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email or phone number" [(ngModel)]="email" required>
                     </div>
                 </div>
                 <div class="input-wrapper">
                     <div class="input-field">
-                        <input type="password" id="password" name="password" placeholder="Enter your password" ngModel required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" [(ngModel)]="password" required>
                     </div>
                 </div>
             </div>
             <div class="login-button-section">
-                <button type="submit" class="login-button">Log In</button>
+                <button type="submit" class="login-button" (click)="login()">Log In</button>
                 <a class="forgot-password-link" href="/ForgetPassword">Forget Password?</a>
             </div>
             <div class="login-button-section">

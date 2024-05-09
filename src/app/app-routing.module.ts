@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { HomeComponent } from './Components/home/home.component';
 import { LoginPageComponent } from './Components/login-page/login-page.component';
+
 import { FavouritesComponent } from './Components/favourites/favourites.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { EditProfileComponent } from './Components/edit-profile/edit-profile.component';
@@ -19,6 +20,9 @@ const routes: Routes = [
   {path: 'NewPost' , component : GeneratePostComponent},
   {path : 'Messages' , component : MessagesComponent},
   { path: 'MyAds', component: UserAdsComponent },
+
+
+  
 ];
 
 @NgModule({
