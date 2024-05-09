@@ -23,25 +23,27 @@
                                     </span>
                                 </div>
                             </div>
-                            <form>
+                            <form >
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="name">Name</label>
-                                    <input type="text" id="name" class="form-control" placeholder="Enter your name" />
+                                    <input type="text" id="name" class="form-control" placeholder="Enter your name"  />
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="phone">Phone no.</label>
                                     <input type="text" id="phone" class="form-control" placeholder="Enter your phone number" />
                                 </div>
 
+
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="email">Email</label>
-                                    <input type="email" id="email" class="form-control" placeholder="Enter your email" />
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" [(ngModel)]="email" required/>
                                 </div>
 
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="password">Password</label>
-                                    <input type="password" id="password" class="form-control" placeholder="Enter your password" />
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" [(ngModel)]="password" required />
                                 </div>
+
 
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="gender">Governorate</label>
@@ -75,15 +77,15 @@
                                         <option value="Suez">Suez</option>
                                         <option value="Luxor">Luxor</option>
                                     </select>
-                                </div>
+                                </div> 
 
-                                <div class="mb-4">
+                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="Location">Location</label>
                                     <input type="Location" id="Location" class="form-control" placeholder="Enter your Location" />
-                                </div>
+                                </div> 
 
 
-                                <div class="mb-4">
+                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="gender">Gender</label>
                                     <select class="form-select" id="gender" aria-label="Gender">
                                         <option selected disabled>Choose gender</option>
@@ -97,10 +99,10 @@
                                     <label class="form-check-label" for="form2Example3c">
                                         By signing up you agree to receive updates and special offers.
                                     </label>
-                                </div>
+                                </div>  
 
                                 <div class="text-center mb-4">
-                                    <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
+                                    <button type="submit" class="btn btn-primary btn-lg" (click)="register()">Sign up</button>
                                 </div>
                             </form>
                         </div>

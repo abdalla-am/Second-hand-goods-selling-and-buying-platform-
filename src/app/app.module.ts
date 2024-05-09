@@ -45,6 +45,7 @@ import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-si
   imports: [
     BrowserModule,
     AppRoutingModule,
+    //used for firebase authentication ---->FormsModule
     FormsModule ,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireModule,
