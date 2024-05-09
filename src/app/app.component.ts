@@ -15,10 +15,10 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Check if the route is home, login, or sign up
-        if (['/', '/Login', '/SignUp' , '/ForgetPassword' , '/ads'].includes(this.router.url)) {
-          this.showBreadcrumbAndSidebar = false;
-        } else {
+        if (['/Favourites', '/Dashboard', '/EditProfile' , '/NewPost' , '/MyAds' , '/Messages'].includes(this.router.url)) {
           this.showBreadcrumbAndSidebar = true;
+        } else {
+          this.showBreadcrumbAndSidebar = false;
         }
       }
     });

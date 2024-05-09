@@ -2,7 +2,7 @@
   <div class="section">
     <h2 class="section-title" style="text-align: center; margin: 10px;">Popular Categories</h2>
     <div class="category-grid">
-      <div class="category" *ngFor="let category of categories" >
+      <div class="category" *ngFor="let category of categories" (click)="navigateToAds(category.value)" >
         <div class="icon-container">
           <i class="{{ category.icon }}"></i>
         </div>
@@ -15,25 +15,6 @@
     </div>
 
     <!-- Ads Section -->
-    <div class="ad-grid">
-      <div class="ad-container" *ngFor="let ad of ads">
-        <div class="ad">
-          <div class="ad-details">
-            <img [src]="ad.imageUrl" alt="Ad Image">
-            <div>
-              <h2>{{ ad.name }}</h2>
-              <i class="fas fa-heart"></i> <!-- Favorite icon -->
-              <p>{{ ad.price }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  </div>
-
-  <div class="view-all">
-    <span>View All</span>
-    <i class="fas fa-arrow-right"></i>
+    <app-ads> </app-ads>
   </div>
 </div>
