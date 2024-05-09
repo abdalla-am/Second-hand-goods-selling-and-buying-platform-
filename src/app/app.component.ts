@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AutheroizedUserService } from './Services/autheroized-user.service';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
