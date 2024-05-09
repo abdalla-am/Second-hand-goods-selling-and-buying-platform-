@@ -16,10 +16,10 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { BreadCrumbComponent } from './Components/bread-crumb/bread-crumb.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
-import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
+
 
 
 
@@ -40,13 +40,13 @@ import { environment } from '../environments/environment';
     BreadCrumbComponent,
     SidebarComponent,
     FileUploadComponent,
-    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule ,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule
   ],
   providers: [
     provideClientHydration()

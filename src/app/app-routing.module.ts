@@ -9,7 +9,6 @@ import { EditProfileComponent } from './Components/edit-profile/edit-profile.com
 import { GeneratePostComponent } from './Components/generate-post/generate-post.component';
 import { MessagesComponent } from './Components/messages/messages.component';
 import { UserAdsComponent } from './Components/user-ads/user-ads.component';
-import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {path:"SignUp" , component : SignUpComponent},
@@ -20,7 +19,6 @@ const routes: Routes = [
   {path: 'NewPost' , component : GeneratePostComponent},
   {path : 'Messages' , component : MessagesComponent},
   { path: 'MyAds', component: UserAdsComponent },
-  {path : "ForgetPassword" , component : ForgetPasswordComponent}
 ];
 
 @NgModule({
