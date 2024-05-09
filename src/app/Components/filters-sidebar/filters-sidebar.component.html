@@ -1,0 +1,54 @@
+<div class="filters-container">
+    <!-- Header Section -->
+    <div class="header-section">
+        <span class="filters-title">Filter by</span>
+        <span class="clear-btn">Clear All</span>
+    </div>
+
+     <!-- Price Range Section -->
+     <div class="price-range-section">
+        <div class="FilterHeader">Price range</div>
+        <div class="price-inputs">
+            <input type="number" id="minPrice" name="minPrice" placeholder="Min" [(ngModel)]="minPrice">
+            <input type="number" id="maxPrice" name="maxPrice" placeholder="Max" [(ngModel)]="maxPrice">
+        </div>
+    </div>
+
+    <!-- Locations Section -->
+    <div class="locations-section">
+        <div class="FilterHeader">Location</div>
+        <!-- Location dropdown -->
+        <select id="governorateSelect" name="governorateSelect" [(ngModel)]="selectedGovernorate">
+            <option *ngFor="let governorate of governorates" [value]="governorate">{{ governorate }}</option>
+        </select>
+    </div>
+
+    <!-- Condition Section -->
+    <div class="condition-section">
+        <div class="FilterHeader">Condition</div>
+        <!-- Condition filter elements -->
+        <div class="condition" *ngFor="let condition of conditions">
+            <input type="checkbox" [id]="condition" [name]="condition">
+            <label [for]="condition">{{ condition }}</label>
+        </div>
+    </div>
+    <!-- Uploaded Section -->
+    <div class="uploaded-section">
+        <div class="FilterHeader">DATE</div>
+        <!-- Uploaded filter elements -->
+        <div class="upload-date">
+            <input type="checkbox" id="dateToday" name="dateToday">
+            <label for="dateToday">Today</label>
+        </div>
+        <div class="upload-date">
+            <input type="checkbox" id="dateThisWeek" name="dateThisWeek">
+            <label for="dateThisWeek">This Week</label>
+        </div>
+        <div class="upload-date">
+            <input type="checkbox" id="dateLast 90 days" name="dateLast 90 days">
+            <label for="dateLast 90 days">Last 90 days</label>
+        </div>
+        
+        <!-- Add more upload date options as needed -->
+    </div>
+</div>

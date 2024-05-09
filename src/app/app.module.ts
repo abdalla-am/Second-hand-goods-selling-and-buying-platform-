@@ -19,10 +19,9 @@ import { FileUploadComponent } from './Components/file-upload/file-upload.compon
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
-
-
-
-
+import { CommonModule } from '@angular/common';
+import { AdsComponent } from './Components/ads/ads.component';
+import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-sidebar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,13 +39,16 @@ import { environment } from '../environments/environment';
     BreadCrumbComponent,
     SidebarComponent,
     FileUploadComponent,
+    AdsComponent,
+    FiltersSidebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule ,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireModule
+    AngularFireModule,
+    CommonModule
   ],
   providers: [
     provideClientHydration()

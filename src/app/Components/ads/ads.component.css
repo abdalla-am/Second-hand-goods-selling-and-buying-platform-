@@ -1,0 +1,127 @@
+/* Container Styles */
+.container {
+  display: flex;
+  margin: 0;
+}
+
+.sidebar {
+  width: 25%; /* Adjust width as needed */
+}
+
+.ad-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 10px;
+}
+
+.ad-container {
+  width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+}
+
+.ad-card {
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: aliceblue;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ad-details {
+  padding: 20px;
+}
+
+.ad-image {
+  width: 100%;
+}
+
+.ad-info {
+  margin-top: 10px;
+}
+
+.ad-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.ad-favorite-icon {
+  color: red;
+  margin-right: 5px;
+}
+
+.ad-price {
+  font-size: 16px;
+  margin-top: 5px;
+  color: #333;
+}
+
+/* Pagination Styles */
+.pagination-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}
+
+.page-link:focus {
+  outline: none;
+}
+
+.page-link.disabled {
+  pointer-events: none;
+  background-color: #eee;
+  color: #999;
+}
+
+.page-link.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+@media (max-width: 768px) {
+  .ad-container {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+    display: none; /* Hide sidebar on smaller screens */
+  }
+  .ad-container {
+    width: calc(100% - 20px);
+    margin-left: 10px; /* Add some space between ads on smaller screens */
+    margin-right: 10px;
+  }
+}
