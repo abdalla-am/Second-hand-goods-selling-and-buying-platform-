@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
@@ -18,10 +18,12 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; // Import AngularFireDatabaseModule
 import { environment } from '../environments/environment';
 import { CommonModule } from '@angular/common';
 import { AdsComponent } from './Components/ads/ads.component';
 import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-sidebar.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,15 +47,14 @@ import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-si
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //used for firebase authentication ---->FormsModule
-    FormsModule ,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireModule,
-    CommonModule
+    AngularFireDatabaseModule, // Add AngularFireDatabaseModule here
+    CommonModule,
+    HttpClientModule, // Import HttpClientModule without .withFetch()
+    
   ],
-  providers: [
-    provideClientHydration()
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

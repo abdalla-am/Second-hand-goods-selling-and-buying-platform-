@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from '../../Services/categories.service';
-import { AdsListService } from '../../Services/ads-list.service';
-import { Ads } from '../../Interfaces/ads';
+import { AdvertisementService } from '../../Services/advertisement.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,46 +8,50 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ads.component.css']
 })
 export class AdsComponent implements OnInit {
-  categories: any;
-  ads: Ads[] = [];
-  filteredAds: Ads[] = [];
-  pagedAds: Ads[] = []; // Added property for paged ads
+  ads: any[] = [];
+  filteredAds: any[] = [];
+  pagedAds: any[] = [];
   selectedCategory: string = '';
   showSidebar: boolean = false;
-  currentPage: number = 1; // Added property for current page
-  pageSize: number = 12; // Added property for number of ads per page
+  currentPage: number = 1;
+  pageSize: number = 12;
 
   constructor(
     private route: ActivatedRoute,
-    private categoryService: CategoriesService,
-    private adService: AdsListService
+    private adService: AdvertisementService // Inject AdvertisementService
   ) { }
 
   ngOnInit(): void {
-    this.categories = this.categoryService.getCategories();
-    this.ads = this.adService.getAllAds();
-    
-    this.route.params.subscribe((params: { [x: string]: any; }) => {
-      const categoryFromUrl = params['category'];
-      if (categoryFromUrl) {
-        this.selectedCategory = categoryFromUrl;
-        this.filterAdsByCategory(categoryFromUrl);
-        this.showSidebar = true;
+    this.adService.getAdvertisements().subscribe(data => {
+      if (typeof data === 'object' && data !== null) { // Check if data is an object and not null
+        // Convert object to array
+        this.ads = Object.values(data);
+        this.route.params.subscribe((params: { [x: string]: any; }) => {
+          const categoryFromUrl = params['category'];
+          if (categoryFromUrl) {
+            this.selectedCategory = categoryFromUrl;
+            this.filterAdsByCategory([categoryFromUrl]); // Pass category as an array
+            this.showSidebar = true;
+          } else {
+            this.selectedCategory = 'All';
+            this.filteredAds = [...this.ads];
+            this.showSidebar = false;
+          }
+          this.setPage(1); // Set initial page
+        });
       } else {
-        this.selectedCategory = 'All';
-        this.filteredAds = [...this.ads];
-        this.showSidebar = false;
+        console.error('Data returned by getAdvertisements is not an object or is null:', data);
       }
-      this.setPage(1); // Set initial page
+    }, error => {
+      console.error('Error fetching advertisements:', error);
     });
   }
 
-  filterAdsByCategory(category: string): void {
-    const lowerCaseCategory = category.toLowerCase();
-    if (lowerCaseCategory === 'all') {
+  filterAdsByCategory(categories: string[]): void {
+    if (categories.length === 0) {
       this.filteredAds = [...this.ads];
     } else {
-      this.filteredAds = this.ads.filter(ad => ad.category.toLowerCase() === lowerCaseCategory);
+      this.filteredAds = this.ads.filter(ad => categories.includes(ad.category.toLowerCase()));
     }
   }
 

@@ -6,11 +6,13 @@
     <div class="ad-container" *ngFor="let ad of pagedAds">
       <div class="ad-card">
         <div class="ad-details">
-          <img [src]="ad.imageUrl" alt="Ad Image" class="ad-image">
+          <img [src]="ad.imageURL" alt="Ad Image" class="ad-image">
           <div class="ad-info">
-            <h2 class="ad-title">{{ ad.name }}</h2>
-            <i class="fas fa-heart ad-favorite-icon"></i>
+            <h2 class="ad-title">{{ ad.title }}</h2>
+            <p class="ad-description">{{ ad.description }}</p>
             <p class="ad-price">{{ ad.price }}</p>
+            <p class="ad-category">{{ ad.category }}</p>
+            <i class="fas fa-heart ad-favorite-icon"></i>
           </div>
         </div>
       </div>

@@ -125,3 +125,24 @@
     margin-right: 10px;
   }
 }
+
+/* Adjust ad container width when fewer than 3 items per page */
+@media (max-width: 992px) {
+  .ad-container {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .ad-container {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 576px) {
+  .ad-container {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
