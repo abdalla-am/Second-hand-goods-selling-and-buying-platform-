@@ -24,4 +24,8 @@ export class CategoriesService {
   getCategories() {
     return this.categories;
   }
+  getCategory(value: string): string | undefined {
+    const category = this.categories.find(category => category.label === value);
+    return category ? category.value : undefined;
+  }
 }

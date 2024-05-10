@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { ActivatedRoute } from '@angular/router';
+import { CategoriesService } from '../../Services/categories.service';
 
 @Component({
   selector: 'app-ads',
@@ -18,7 +19,8 @@ export class AdsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private adService: AdvertisementService
+    private adService: AdvertisementService,
+    private categotyService : CategoriesService
   ) { }
 
   ngOnInit(): void {
@@ -29,12 +31,17 @@ export class AdsComponent implements OnInit {
           const categoryFromUrl = params['category'];
           if (categoryFromUrl) {
             this.selectedCategory = categoryFromUrl.toLowerCase();
-            this.filterAdsByCategory();
-            this.showSidebar = true; // Show sidebar if a category is specified
+            if (this.selectedCategory !== 'all') {
+              this.filterAdsByCategory();
+              this.showSidebar = true; // Show sidebar if a category is selected
+            } else {
+              this.filteredAds = [...this.ads];
+              this.showSidebar = true; // Always show the sidebar when 'all' category is selected
+            }
           } else {
             this.selectedCategory = '';
             this.filteredAds = [...this.ads];
-            this.showSidebar = false; // Hide sidebar if no category is specified
+            this.showSidebar = false; // Hide sidebar if no category is selected
           }
           this.setPage(1);
         });
@@ -45,10 +52,10 @@ export class AdsComponent implements OnInit {
       console.error('Error fetching advertisements:', error);
     });
   }
-
+  
   filterAdsByCategory(): void {
-    if (this.selectedCategory && this.selectedCategory.toLowerCase() !== 'all') {
-      this.filteredAds = this.ads.filter(ad => ad.category.toLowerCase() === this.selectedCategory);
+    if (this.selectedCategory) {
+      this.filteredAds = this.ads.filter(ad => this.categotyService.getCategory(ad.Category) === this.selectedCategory);
     } else {
       this.filteredAds = [...this.ads];
     }
@@ -80,11 +87,4 @@ export class AdsComponent implements OnInit {
   get totalPages(): number {
     return Math.ceil(this.filteredAds.length / this.pageSize);
   }
-
-  // Method to respond to changes in sidebar filters
-  updateFilteredAds(): void {
-    this.filterAdsByCategory(); // Update ads based on category filter
-    this.setPage(1); // Reapply pagination after updating ads
-  }
-
 }

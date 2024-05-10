@@ -1,6 +1,6 @@
 <div class="container">
   <aside class="sidebar" *ngIf="showSidebar">
-    <app-filters-sidebar (filtersChanged)="updateFilteredAds()"></app-filters-sidebar>
+    <app-filters-sidebar></app-filters-sidebar>
   </aside>
   <div class="ad-grid">
     <div class="ad-container" *ngFor="let ad of pagedAds">
