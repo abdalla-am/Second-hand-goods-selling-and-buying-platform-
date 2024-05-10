@@ -15,4 +15,8 @@ export class AdvertisementService {
     const url = `${this.baseUrl}/${this.adsEndpoint}`;
     return this.http.get<any>(url);
   }
+  getAdvertisementsByCategory(category: string): Observable<any> {
+    const url = `${this.baseUrl}/${this.adsEndpoint}?orderBy="category"&equalTo="${category}"`;
+    return this.http.get<any>(url);
+  }
 }

@@ -12,32 +12,31 @@ export class AdsComponent implements OnInit {
   filteredAds: any[] = [];
   pagedAds: any[] = [];
   selectedCategory: string = '';
-  showSidebar: boolean = false;
   currentPage: number = 1;
   pageSize: number = 12;
+  showSidebar: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private adService: AdvertisementService // Inject AdvertisementService
+    private adService: AdvertisementService
   ) { }
 
   ngOnInit(): void {
     this.adService.getAdvertisements().subscribe(data => {
-      if (typeof data === 'object' && data !== null) { // Check if data is an object and not null
-        // Convert object to array
+      if (typeof data === 'object' && data !== null) {
         this.ads = Object.values(data);
         this.route.params.subscribe((params: { [x: string]: any; }) => {
           const categoryFromUrl = params['category'];
           if (categoryFromUrl) {
-            this.selectedCategory = categoryFromUrl;
-            this.filterAdsByCategory([categoryFromUrl]); // Pass category as an array
-            this.showSidebar = true;
+            this.selectedCategory = categoryFromUrl.toLowerCase();
+            this.filterAdsByCategory();
+            this.showSidebar = true; // Show sidebar if a category is specified
           } else {
-            this.selectedCategory = 'All';
+            this.selectedCategory = '';
             this.filteredAds = [...this.ads];
-            this.showSidebar = false;
+            this.showSidebar = false; // Hide sidebar if no category is specified
           }
-          this.setPage(1); // Set initial page
+          this.setPage(1);
         });
       } else {
         console.error('Data returned by getAdvertisements is not an object or is null:', data);
@@ -47,11 +46,11 @@ export class AdsComponent implements OnInit {
     });
   }
 
-  filterAdsByCategory(categories: string[]): void {
-    if (categories.length === 0) {
-      this.filteredAds = [...this.ads];
+  filterAdsByCategory(): void {
+    if (this.selectedCategory && this.selectedCategory.toLowerCase() !== 'all') {
+      this.filteredAds = this.ads.filter(ad => ad.category.toLowerCase() === this.selectedCategory);
     } else {
-      this.filteredAds = this.ads.filter(ad => categories.includes(ad.category.toLowerCase()));
+      this.filteredAds = [...this.ads];
     }
   }
 
@@ -81,4 +80,11 @@ export class AdsComponent implements OnInit {
   get totalPages(): number {
     return Math.ceil(this.filteredAds.length / this.pageSize);
   }
+
+  // Method to respond to changes in sidebar filters
+  updateFilteredAds(): void {
+    this.filterAdsByCategory(); // Update ads based on category filter
+    this.setPage(1); // Reapply pagination after updating ads
+  }
+
 }

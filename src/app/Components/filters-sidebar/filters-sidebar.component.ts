@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filters-sidebar',
@@ -16,5 +16,9 @@ export class FiltersSidebarComponent {
   minPrice: number | undefined;
   maxPrice: number | undefined;
   selectedGovernorate: string | undefined;
-
+  @Output() filtersChanged: EventEmitter<void> = new EventEmitter<void>();
+  // Method to handle changes in filters
+  onFiltersChanged(): void {
+    this.filtersChanged.emit(); // Emit event when filters are updated
+  }
 }
