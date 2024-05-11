@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,12 @@ export class AdvertisementService {
   getAdvertisementsByCategory(category: string): Observable<any> {
     const url = `${this.baseUrl}/${this.adsEndpoint}?orderBy="category"&equalTo="${category}"`;
     return this.http.get<any>(url);
+  }
+  getUserAdsvetisment(userID: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/ads`).pipe(
+      map((ads: any[]) => {
+        return ads.filter(ad => ad.authorID === userID);
+      })
+    );
   }
 }

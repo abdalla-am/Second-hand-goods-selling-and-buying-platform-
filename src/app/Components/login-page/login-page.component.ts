@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router'; // Import Router
 import { AutheroizedUserService } from '../../Services/autheroized-user.service';
-import { UserService } from '../../Services/user.service';
  //added by Abdalla
 
 
@@ -64,6 +63,7 @@ export class LoginPageComponent implements OnInit{
     
     this.email = '';
     this.password = '';
+    
 
   }
 }

@@ -13,13 +13,12 @@ import { UserAdsComponent } from './Components/user-ads/user-ads.component';
 import { AdsComponent } from './Components/ads/ads.component';
 import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-sidebar.component';
 
-
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent},
   {path:"SignUp" , component : SignUpComponent},
   {path: 'Login' , component : LoginPageComponent},
   {path : 'Favourites' , component : FavouritesComponent},
-  { path: 'Dashboard', component: DashboardComponent },
+  { path: 'Dashboard', component: DashboardComponent},
   {path:"EditProfile" , component : EditProfileComponent},
   {path: 'NewPost' , component : GeneratePostComponent},
   {path : 'Messages' , component : MessagesComponent},
