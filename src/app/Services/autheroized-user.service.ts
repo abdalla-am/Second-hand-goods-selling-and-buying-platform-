@@ -10,16 +10,29 @@ import { Router } from '@angular/router'
   providedIn: 'root'
 })
 export class AutheroizedUserService {
+  private currentUser: firebase.User | null = null;
 
-  constructor(private fireauth : AngularFireAuth, private router:Router) { }
+  constructor(
+    private fireauth: AngularFireAuth,
+    private router: Router,
+    private userService: UsersService
+  ) {
+    this.fireauth.authState.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
-  // login method
-  login(email : string, password : string) {
-    this.fireauth.signInWithEmailAndPassword(email,password).then( res => {
-        localStorage.setItem('token','true');
-        this.router.navigate(['']);
-
-    }, err => {
+  async login(email: string, password: string): Promise<void> {
+    try {
+      const res = await this.fireauth.signInWithEmailAndPassword(email, password);
+      const userID = this.getLoggedInUserID();
+      if (userID) {
+        localStorage.setItem('userID', userID);
+        alert(userID);
+        this.router.navigate(['/']);
+      }
+    } catch (err: any) {
+      console.error('Login error:', err);
         alert("Something went wrong");
         this.router.navigate(['/Login']);
     })
