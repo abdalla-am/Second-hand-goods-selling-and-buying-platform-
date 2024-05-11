@@ -53,8 +53,13 @@
 }
 
 .ad-favorite-icon {
-  color: red;
-  margin-right: 5px;
+  font-size: 20px; /* Adjust size as needed */
+  color: #ccc; /* Default color */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.ad-favorite-icon.favorited {
+  color: red; /* Red color for favorited items */
 }
 
 .ad-price {

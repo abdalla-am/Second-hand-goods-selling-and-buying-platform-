@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { GovernorateService } from '../../Services/governorate.service';
 
 @Component({
   selector: 'app-filters-sidebar',
@@ -6,19 +7,31 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './filters-sidebar.component.css'
 })
 export class FiltersSidebarComponent {
-  governorates: string[] = ['All' , 'Cairo', 'Alexandria', 'Port Said', 'Suez',
-    'Damietta', 'Dakahlia', 'Beheira', 'Kafr El Sheikh', 'Gharbia',
-    'Monufia', 'Qalyubia', 'Sharqia', 'Ismailia', 'Giza', 'Faiyum',
-    'Beni Suef', 'Minya', 'Asyut', 'Sohag', 'Qena', 'Luxor', 'Aswan',
-    'Red Sea', 'New Valley', 'Matrouh','North Sinai', 'South Sinai'
-  ];
-  conditions: string[] = ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor'];
+  government: any;
+  constructor(private governmentservice : GovernorateService) { }
+  ngOnInit(): void {
+    this.government = this.governmentservice.getGovernorates();
+  }
+  
   minPrice: number | undefined;
   maxPrice: number | undefined;
   selectedGovernorate: string | undefined;
-  @Output() filtersChanged: EventEmitter<void> = new EventEmitter<void>();
+  conditions: string[] = ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor'];
+  selectedConditions: string[] = [];
+  selectedDates: string[] = [];
+ 
+  
+  @Output() filtersChanged: EventEmitter<any> = new EventEmitter<any>();
   // Method to handle changes in filters
   onFiltersChanged(): void {
-    this.filtersChanged.emit(); // Emit event when filters are updated
+    // Collect selected filters
+    const filters = {
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      selectedGovernorate: this.selectedGovernorate,
+      selectedConditions: this.selectedConditions,
+      selectedDates: this.selectedDates
+    };
+    this.filtersChanged.emit(filters); // Emit event with selected filters
   }
 }

@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../Services/users.service';
+import { AutheroizedUserService } from '../../Services/autheroized-user.service';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrl: './edit-profile.component.css'
+  styleUrls: ['./edit-profile.component.css']
 })
-export class EditProfileComponent {
+export class EditProfileComponent implements OnInit {
   fullName: string = '';
   email: string = '';
   phone: string = '';
@@ -16,19 +18,88 @@ export class EditProfileComponent {
   newPassword: string = '';
   confirmPassword: string = '';
 
+  constructor(
+    private usersService: UsersService,
+    private authService: AutheroizedUserService
+  ) {}
+
+  ngOnInit() {
+    const uid = this.authService.getLoggedInUserID();
+    if (uid) {
+      this.usersService.getUserData(uid).subscribe((userData: any) => {
+        if (userData) {
+          this.fullName = userData.full_name || '';
+          this.email = userData.email || '';
+          this.phone = userData.phone || '';
+          this.location = userData.location || '';
+          this.website = userData.website || '';
+          this.bio = userData.bio || '';
+        }
+      });
+    }
+  }
+
   saveChanges() {
-    // Implement logic to save changes
-    console.log('Changes saved');
+    const uid = this.authService.getLoggedInUserID();
+    if (uid) {
+      const updatedUserData = {
+        full_name: this.fullName,
+        email: this.email,
+        phone: this.phone,
+        location: this.location,
+        website: this.website,
+        bio: this.bio
+      };
+      this.usersService.updateUserData(uid, updatedUserData).subscribe(() => {
+        alert('User data updated successfully');
+        console.log('User data updated successfully');
+      }, error => {
+        console.error('Error updating user data:', error);
+        // Handle error appropriately
+      });
+    }
   }
 
   changePassword() {
-    // Implement logic to change password
-    console.log('Password changed');
+    const uid = this.authService.getLoggedInUserID();
+    if (uid && this.newPassword === this.confirmPassword) {
+      this.authService.changePassword(this.currentPassword, this.newPassword)
+        .then(() => {
+          alert('Password changed successfully');
+          console.log('Password changed successfully');
+          this.currentPassword = '';
+          this.newPassword = '';
+          this.confirmPassword = '';
+        })
+        .catch(error => {
+          console.error('Error changing password:', error);
+          // Handle error appropriately
+        });
+    } else {
+      alert('New password and confirm password do not match');
+    }
   }
-
+  
   deleteAccount() {
-    // Implement logic to delete account
-    console.log('Account deleted');
-  }
-
+    const uid = this.authService.getLoggedInUserID();
+    if (uid) {
+      if (confirm('Are you sure you want to delete your account?')) {
+        this.authService.deleteAccount()
+          .then(() => {
+            this.usersService.deleteUserData(uid).subscribe(() => {
+              alert('Account deleted successfully');
+              console.log('Account deleted successfully');
+              // Redirect or perform any other action
+            }, error => {
+              console.error('Error deleting user data:', error);
+              // Handle error appropriately
+            });
+          })
+          .catch(error => {
+            console.error('Error deleting account:', error);
+            // Handle error appropriately
+          });
+      }
+    }
+  }  
 }

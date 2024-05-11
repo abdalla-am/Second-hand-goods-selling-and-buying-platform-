@@ -52,6 +52,14 @@ export class AdsComponent implements OnInit {
       console.error('Error fetching advertisements:', error);
     });
   }
+
+  // Function to handle filter changes emitted from FiltersSidebarComponent
+  onFiltersChanged(filters: any): void {
+    this.adService.getAdvertisementsBySidebarFilters(filters).subscribe(filteredAds => {
+      this.filteredAds = Object.values(filteredAds);
+      this.setPage(1); // Update pagination when filters change
+    });
+  }
   
   filterAdsByCategory(): void {
     if (this.selectedCategory) {
@@ -60,7 +68,6 @@ export class AdsComponent implements OnInit {
       this.filteredAds = [...this.ads];
     }
   }
-
   setPage(page: number) {
     if (page < 1 || page > this.totalPages) {
       return;
@@ -70,7 +77,9 @@ export class AdsComponent implements OnInit {
     const endIndex = Math.min(startIndex + this.pageSize, this.filteredAds.length);
     this.pagedAds = this.filteredAds.slice(startIndex, endIndex);
   }
-
+  toggleFavorite(ad: any) {
+    ad.favorite = !ad.favorite;
+  }
   previousPage() {
     this.setPage(this.currentPage - 1);
   }

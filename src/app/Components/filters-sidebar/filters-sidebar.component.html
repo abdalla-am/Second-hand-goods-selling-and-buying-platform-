@@ -19,7 +19,7 @@
         <div class="FilterHeader">Location</div>
         <!-- Location dropdown -->
         <select id="governorateSelect" name="governorateSelect" [(ngModel)]="selectedGovernorate" (change)="onFiltersChanged()">
-            <option *ngFor="let governorate of governorates" [value]="governorate">{{ governorate }}</option>
+            <option *ngFor="let governorate of government" [value]="governorate">{{ governorate }}</option>
         </select>
     </div>
 

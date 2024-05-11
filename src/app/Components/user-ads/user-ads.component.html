@@ -25,11 +25,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ad of filteredAds">
-        <td>{{ ad.title }}</td>
-        <td>{{ ad.date }}</td>
-        <td>{{ ad.price }}</td>
-        <td>{{ ad.status }}</td>
+      <tr *ngFor="let ad of userAds">
+        <td>{{ ad.title}}</td>
+        <td>{{ ad.Date_created}}</td>
+        <td>{{ ad.price}}</td>
+        <td>{{ ad.status}}</td>
         <td class="Action">
           <button (click)="editAd(ad)">Edit</button>
           <div class="dropdown" (mouseenter)="toggleDropdown(ad, true)" (mouseleave)="toggleDropdown(ad, false)">

@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AutheroizedUserService {
   loggedInUser$: Observable<boolean> = this.loggedInUserSubject.asObservable();
   private currentUser: firebase.User | null = null;
 
-  constructor(private fireauth: AngularFireAuth, private router: Router) {
+  constructor(private fireauth: AngularFireAuth, private router: Router , private db: AngularFireDatabase) {
     this.fireauth.authState.subscribe(user => {
       this.currentUser = user;
       this.loggedInUserSubject.next(!!user);
@@ -35,15 +36,13 @@ export class AutheroizedUserService {
     }
   }
 
-  async register(email: string, password: string): Promise<void> {
+  async register(email: string, password: string, additionalData: any): Promise<void> {
     try {
       const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
       if (res.user) {
-        // Extract UID from the authentication response
         const userID = res.user.uid;
-        // Save user ID in local storage
         localStorage.setItem('userID', userID);
-        // Navigate to the login page after successful registration
+        await this.saveUserData(userID, { email, ...additionalData });
         this.router.navigate(['/Login']);
       } else {
         throw new Error("User registration failed");
@@ -55,11 +54,21 @@ export class AutheroizedUserService {
     }
   }
 
+  private async saveUserData(userID: string, data: any): Promise<void> {
+    try {
+      await this.db.object(`/users/${userID}`).set(data);
+    } catch (error) {
+      console.error('Error saving user data:', error);
+      throw error;
+    }
+  }
+
+
   async logout(): Promise<void> {
     try {
       await this.fireauth.signOut();
       localStorage.removeItem('userID');
-      this.router.navigate(['/Login']);
+      this.router.navigate(['/']);
     } catch (err: any) {
       console.error('Logout error:', err);
       alert(err.message);
@@ -72,5 +81,27 @@ export class AutheroizedUserService {
 
   getLoggedInUserID(): string | null {
     return this.currentUser ? this.currentUser.uid : null;
+  }
+  
+  getCurrentUser(): firebase.User | null {
+    return this.currentUser;
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Promise<void> {
+    const user = this.currentUser;
+    if (user) {
+      return user.updatePassword(newPassword);
+    } else {
+      return Promise.reject(new Error('User not authenticated'));
+    }
+  }
+
+  deleteAccount(): Promise<void> {
+    const user = this.currentUser;
+    if (user) {
+      return user.delete();
+    } else {
+      return Promise.reject(new Error('User not authenticated'));
+    }
   }
 }

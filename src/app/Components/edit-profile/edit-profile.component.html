@@ -7,7 +7,8 @@
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="abdallaayman@gmail.com">
+            <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="abdallaayman@gmail.com" disabled>
+            <!-- Disable email input to prevent editing -->
         </div>
         <div class="form-group">
             <label for="phone">Phone Number</label>
@@ -38,14 +39,14 @@
             <input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword">
         </div>
         <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
+            <label for="confirmPassword">Confirm New Password</label>
             <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword">
         </div>
-        <button type="button" class="btn" (click)="changePassword()">Save Changes</button>
+        <button type="button" class="btn" (click)="changePassword()">Change Password</button>
     </section>
     <section class="account-deletion">
         <h1>Delete Account</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan felis nunc, ut sagittis augue imperdiet quis. Vestibulum bibendum ultricies ipsum, id suscipit ligula facilisis ac. Praesent ultricies augue metus.</p>
+        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
         <button type="button" class="btn delete-btn" (click)="deleteAccount()">Delete Account</button>
     </section>
 </main>

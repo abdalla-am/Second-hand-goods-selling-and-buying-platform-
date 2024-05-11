@@ -41,4 +41,7 @@ export class SidebarComponent{
       this.router.navigateByUrl('/' + Navigatetion); // Navigate to Dashboard if authorized
     }
   }
+  logout() {
+    this.authService.logout(); // Call the logout() method from the AutheroizedUserService
+  }
 }

@@ -1,108 +1,67 @@
 <div class="container-fluid">
     <div class="row align-items-center justify-content-center">
-        <!-- Signup Section -->
         <div class="col-md-4 mb-4">
             <div class="signup-section text-center">
                 <p>Used to Sell & Buy</p>
             </div>
         </div>
-
-        <!-- Signup Form -->
         <div class="col-md-8">
             <div class="rounded bg-blue relative m-0 box-sizing-border flex p-4">
                 <div class="card-body p-md-5">
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-xl-7">
                             <div class="flex flex-col box-sizing-border">
-                                <div class="h1 fw-bold mb-1 text-center">
-                                    Sign Up
-                                </div>
+                                <div class="h1 fw-bold mb-1 text-center">Sign Up</div>
                                 <div class="mb-3 text-center">
                                     <span class="break-words font-normal text-24 text-black">
                                         Already have an account? <a href="/Login" class="text-blue">Login here</a>
                                     </span>
                                 </div>
                             </div>
-                            <form >
+                            <form (ngSubmit)="register()">
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="name">Name</label>
-                                    <input type="text" id="name" class="form-control" placeholder="Enter your name"  />
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" [(ngModel)]="name" required/>
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="phone">Phone no.</label>
-                                    <input type="text" id="phone" class="form-control" placeholder="Enter your phone number" />
+                                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" [(ngModel)]="phone" required/>
                                 </div>
-
-
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="email">Email</label>
                                     <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" [(ngModel)]="email" required/>
                                 </div>
-
                                 <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="password">Password</label>
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" [(ngModel)]="password" required />
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" [(ngModel)]="password" required/>
                                 </div>
-
-
                                 <div class="mb-4">
-                                    <label class="form-label font-weight-bold" for="gender">Governorate</label>
-                                    <select class="form-select" id="gender" aria-label="Gender">
-                                        <option selected disabled>Choose Governorate</option>
-                                        <option value="Cairo">Cairo</option>
-                                        <option value="Alexandria">Alexandria</option>
-                                        <option value="Aswan">Aswan</option>
-                                        <option value="Assiut">Assiut</option>
-                                        <option value="Beheira">Beheira</option>
-                                        <option value="Beni Suef">Beni Suef</option>
-                                        <option value="Dakahlia">Dakahlia</option>
-                                        <option value="Damietta">Damietta</option>
-                                        <option value="Fayoum">Fayoum</option>
-                                        <option value="Gharbia">Gharbia</option>
-                                        <option value="Giza">Giza</option>
-                                        <option value="Ismailia">Ismailia</option>
-                                        <option value="Kafr el-Sheikh">Kafr el-Sheikh</option>
-                                        <option value="Matrouh">Matrouh</option>
-                                        <option value="Minya">Minya</option>
-                                        <option value="Menofia">Menofia</option>
-                                        <option value="New Valley">New Valley</option>
-                                        <option value="North Sinai">North Sinai</option>
-                                        <option value="Port Said">Port Said</option>
-                                        <option value="Qualyubia">Qualyubia</option>
-                                        <option value="Qena">Qena</option>
-                                        <option value="Red Sea">Red Sea</option>
-                                        <option value="Al-Sharqia">Al-Sharqia</option>
-                                        <option value="Sohag">Sohag</option>
-                                        <option value="South Sinai">South Sinai</option>
-                                        <option value="Suez">Suez</option>
-                                        <option value="Luxor">Luxor</option>
+                                    <label class="form-label font-weight-bold" for="governorate">Governorate</label>
+                                    <select class="form-select" id="governorate" name="governorate" aria-label="Governorate" [(ngModel)]="governorate" required>
+                                        <option value="" disabled selected>Choose Governorate</option>
+                                        <option *ngFor="let gov of government" [value]="gov">{{gov}}</option>
                                     </select>
-                                </div> 
-
-                                 <div class="mb-4">
-                                    <label class="form-label font-weight-bold" for="Location">Location</label>
-                                    <input type="Location" id="Location" class="form-control" placeholder="Enter your Location" />
-                                </div> 
-
-
-                                 <div class="mb-4">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label font-weight-bold" for="location">Location</label>
+                                    <input type="text" id="location" name="location" class="form-control" placeholder="Enter your Location" [(ngModel)]="location" required/>
+                                </div>
+                                <div class="mb-4">
                                     <label class="form-label font-weight-bold" for="gender">Gender</label>
-                                    <select class="form-select" id="gender" aria-label="Gender">
-                                        <option selected disabled>Choose gender</option>
+                                    <select class="form-select" id="gender" name="gender" aria-label="Gender" [(ngModel)]="gender" required>
+                                        <option value="" disabled selected>Choose gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
                                 </div>
-
                                 <div class="form-check mb-5">
-                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
                                     <label class="form-check-label" for="form2Example3c">
                                         By signing up you agree to receive updates and special offers.
                                     </label>
-                                </div>  
-
+                                </div>
                                 <div class="text-center mb-4">
-                                    <button type="submit" class="btn btn-primary btn-lg" (click)="register()">Sign up</button>
+                                    <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
                                 </div>
                             </form>
                         </div>
