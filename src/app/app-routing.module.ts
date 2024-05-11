@@ -14,18 +14,19 @@ import { AdsComponent } from './Components/ads/ads.component';
 import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-sidebar.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
-  {path:"SignUp" , component : SignUpComponent},
-  {path: 'Login' , component : LoginPageComponent},
-  {path : 'Favourites' , component : FavouritesComponent},
-  { path: 'Dashboard', component: DashboardComponent},
-  {path:"EditProfile" , component : EditProfileComponent},
-  {path: 'NewPost' , component : GeneratePostComponent},
-  {path : 'Messages' , component : MessagesComponent},
-  { path: 'MyAds', component: UserAdsComponent },
-  { path: 'ads/:category', component: AdsComponent },
-  {path : 'filtersidebar' , component : FiltersSidebarComponent}
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
+  { path: 'SignUp', component: SignUpComponent, data: { breadcrumb: 'Sign Up' } },
+  { path: 'Login', component: LoginPageComponent, data: { breadcrumb: 'Login' } },
+  { path: 'Favourites', component: FavouritesComponent, data: { breadcrumb: 'Favourites' } },
+  { path: 'Dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' } },
+  { path: 'EditProfile', component: EditProfileComponent, data: { breadcrumb: 'Edit Profile' } },
+  { path: 'NewPost', component: GeneratePostComponent, data: { breadcrumb: 'New Post' } },
+  { path: 'Messages', component: MessagesComponent, data: { breadcrumb: 'Messages' } },
+  { path: 'MyAds', component: UserAdsComponent, data: { breadcrumb: 'My Ads' } },
+  { path: 'ads/:category', component: AdsComponent, data: { breadcrumb: 'Ads' } },
+  { path: 'filtersidebar', component: FiltersSidebarComponent, data: { breadcrumb: 'Filter Sidebar' } }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

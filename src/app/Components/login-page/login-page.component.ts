@@ -42,28 +42,32 @@ import { AutheroizedUserService } from '../../Services/autheroized-user.service'
 export class LoginPageComponent implements OnInit{
   
   email:string='';
-  password :string='';
+  password:string='';
+  loginErrorFounded: boolean | undefined;
 
-  constructor(private auth : AutheroizedUserService) { }
+  constructor(private auth: AutheroizedUserService) { }
+
   ngOnInit(): void {
   }
-  login() {
 
-    if(this.email == '') {
+  login() {
+    if(this.email === '') {
       alert('Please enter email');
       return;
     }
 
-    if(this.password == '') {
+    if(this.password === '') {
       alert('Please enter password');
       return;
     }
-
-    this.auth.login(this.email,this.password);
-    
+    this.loginErrorFounded = this.auth.loginError;
+    this.auth.login(this.email, this.password);
     this.email = '';
     this.password = '';
-    
+  }
 
+  // Function to clear login error flag when the user starts typing again
+  clearLoginError() {
+    this.loginErrorFounded = false;
   }
 }

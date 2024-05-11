@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from '../../Services/categories.service';
+import { SearchComponent } from '../search/search.component';
+import { SearchService } from '../../Services/search.service';
 
 @Component({
   selector: 'app-ads',
@@ -9,6 +11,7 @@ import { CategoriesService } from '../../Services/categories.service';
   styleUrls: ['./ads.component.css']
 })
 export class AdsComponent implements OnInit {
+  @ViewChild(SearchComponent) searchComponent: SearchComponent | undefined;
   ads: any[] = [];
   filteredAds: any[] = [];
   pagedAds: any[] = [];
@@ -20,7 +23,8 @@ export class AdsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private adService: AdvertisementService,
-    private categotyService : CategoriesService
+    private categoryService: CategoriesService,
+    private searchService: SearchService
   ) { }
 
   ngOnInit(): void {
@@ -33,15 +37,15 @@ export class AdsComponent implements OnInit {
             this.selectedCategory = categoryFromUrl.toLowerCase();
             if (this.selectedCategory !== 'all') {
               this.filterAdsByCategory();
-              this.showSidebar = true; // Show sidebar if a category is selected
+              this.showSidebar = true;
             } else {
               this.filteredAds = [...this.ads];
-              this.showSidebar = true; // Always show the sidebar when 'all' category is selected
+              this.showSidebar = true;
             }
           } else {
             this.selectedCategory = '';
             this.filteredAds = [...this.ads];
-            this.showSidebar = false; // Hide sidebar if no category is selected
+            this.showSidebar = false;
           }
           this.setPage(1);
         });
@@ -51,24 +55,48 @@ export class AdsComponent implements OnInit {
     }, error => {
       console.error('Error fetching advertisements:', error);
     });
+
+    // Subscribe to search results
+    this.searchService.searchResults$.subscribe(searchResults => {
+      // If search results are available, filter the advertisements
+      if (searchResults.length > 0) {
+        this.filteredAds = this.ads.filter(ad => this.containsSearchTerm(ad, searchResults));
+      } else {
+        // If search results are empty, show all advertisements
+        this.filteredAds = [...this.ads];
+      }
+      this.setPage(1);
+    });
+  }
+
+  // Function to check if an advertisement contains the search term
+  containsSearchTerm(ad: any, searchResults: any[]): boolean {
+    // Check if any of the advertisement properties contain the search term
+    return Object.values(ad).some(value => {
+      if (typeof value === 'string') {
+        return searchResults.some(term => value.toLowerCase().includes(term.toLowerCase()));
+      }
+      return false;
+    });
   }
 
   // Function to handle filter changes emitted from FiltersSidebarComponent
   onFiltersChanged(filters: any): void {
     this.adService.getAdvertisementsBySidebarFilters(filters).subscribe(filteredAds => {
       this.filteredAds = Object.values(filteredAds);
-      this.setPage(1); // Update pagination when filters change
+      this.setPage(1);
     });
   }
   
   filterAdsByCategory(): void {
     if (this.selectedCategory) {
-      this.filteredAds = this.ads.filter(ad => this.categotyService.getCategory(ad.Category) === this.selectedCategory);
+      this.filteredAds = this.ads.filter(ad => this.categoryService.getCategory(ad.Category) === this.selectedCategory);
     } else {
       this.filteredAds = [...this.ads];
     }
   }
-  setPage(page: number) {
+
+  setPage(page: number): void {
     if (page < 1 || page > this.totalPages) {
       return;
     }
@@ -77,14 +105,16 @@ export class AdsComponent implements OnInit {
     const endIndex = Math.min(startIndex + this.pageSize, this.filteredAds.length);
     this.pagedAds = this.filteredAds.slice(startIndex, endIndex);
   }
-  toggleFavorite(ad: any) {
+
+  toggleFavorite(ad: any): void {
     ad.favorite = !ad.favorite;
   }
-  previousPage() {
+
+  previousPage(): void {
     this.setPage(this.currentPage - 1);
   }
 
-  nextPage() {
+  nextPage(): void {
     this.setPage(this.currentPage + 1);
   }
 

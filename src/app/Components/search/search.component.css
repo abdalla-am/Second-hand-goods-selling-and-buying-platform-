@@ -1,0 +1,22 @@
+/* Search input */
+.search-input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Search button */
+.btn-style {
+    background: #2169cc;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-style:hover {
+    background: #1c5ca9;
+}

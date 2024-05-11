@@ -1,10 +1,8 @@
 <div class="breadcrumb-container">
-    <div class="section-title">Account Settings</div>
-    <div class="breadcrumbs">
-      <span class="breadcrumb-item">Home</span>
-      <span class="breadcrumb-separator">/</span>
-      <span class="breadcrumb-item">Dashboard</span>
-      <span class="breadcrumb-separator">/</span>
-      <span class="breadcrumb-item">Settings</span>
-    </div>
+  <div class="section-title">User Profile</div>
+  <div class="breadcrumbs">
+    <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+      <span class="breadcrumb-item"> / {{ crumb }}</span>
+    </ng-container>
   </div>
+</div>

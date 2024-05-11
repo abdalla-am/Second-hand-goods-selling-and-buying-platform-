@@ -11,13 +11,13 @@
             <div class="input-section">
                 <div class="input-wrapper">
                     <div class="input-field">
-                        <div class="error-message">Incorrect email or password. Please try again.</div>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email or phone number" [(ngModel)]="email" required>
+                        <div class="error-message" *ngIf="loginErrorFounded">Incorrect email or password. Please try again.</div>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email or phone number" [(ngModel)]="email" required (input)="clearLoginError()">
                     </div>
                 </div>
                 <div class="input-wrapper">
                     <div class="input-field">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" [(ngModel)]="password" required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" [(ngModel)]="password" required (input)="clearLoginError()">
                     </div>
                 </div>
             </div>

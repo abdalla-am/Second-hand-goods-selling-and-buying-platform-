@@ -51,4 +51,9 @@ export class AdvertisementService {
     alert(url);
     return this.http.get<any[]>(url);
   }
+  searchAdvertisements(keyword: string): Observable<any> {
+    const url = `${this.baseUrl}/${this.adsEndpoint}?orderBy="title"&startAt="${keyword}"&endAt="${keyword}\uf8ff"`;
+    return this.http.get<any>(url);
+  }
 }
+

@@ -1,0 +1,10 @@
+<!-- search.component.html -->
+<form class="d-flex search-form" role="search" (ngSubmit)="search()">
+    <div class="input-group">
+        <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search"
+               [(ngModel)]="searchKeyword" name="searchKeyword">
+        <button class="btn btn-style" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+</form>

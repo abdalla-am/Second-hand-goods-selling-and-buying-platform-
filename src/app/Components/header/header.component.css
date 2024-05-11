@@ -1,32 +1,129 @@
+/* Navigation Bar Styling */
+
+/* Navbar background color */
 .bg-custom-color {
-    background-color: #1B6392;
+    background: linear-gradient(to right, #1B6392, #0E3B5F);
 }
+
+/* Navbar brand */
 .navbar-brand {
-    font-size: 30px; /* Adjust the font size as needed */
-    padding: 0; /* Remove any default padding */
-    margin-right: 15px; /* Add some margin to the right to separate from other elements */
+    font-size: 30px;
+    padding: 10px 15px;
+    margin-right: 20px;
+    color: #fff;
 }
-.nav-item{
+
+/* Navigation items */
+.nav-item {
     font-size: 20px;
+    margin-right: 15px;
 }
+
+/* Navigation links */
+.navbar-nav .nav-link {
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
 .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link:active {
-        color:#E0EDFF;
-    }
-    .navbar-nav .profile-icon {
-        display: flex;
-        align-items: center;
-    }
-.btn-style{
-        float: left;
-        width: 15%;
-        background: #ffffff;
-        border: 1px solid rgb(255, 255, 255);
-        border-left: none;
-        cursor: pointer;
-        margin-right: 10px;
-      }
-.search-input {
-        width: 200px; /* Increase the width of the search box */
-        /* Add margin to create space between the search box and profile icon */
-    }
+.navbar-nav .nav-link:active {
+    color: #2169cc;
+}
+
+/* Profile icon */
+.navbar-nav .profile-icon {
+    margin-left: auto;
+    padding: 10px;
+}
+
+
+
+/* Font Awesome Icons Styling */
+
+/* Font Awesome icons */
+.fa {
+    font-size: 24px;
+}
+
+/* Bell and envelope icons */
+.fa-bell,
+.fa-envelope {
+    font-size: 24px;
+    padding: 8px;
+    background-color: #2169cc;
+    border-radius: 50%;
+    color: #fff;
+    margin-right: 10px;
+}
+
+/* User icon */
+.fa-user {
+    color: #1B6392;
+}
+
+/* Hover effect for bell and envelope icons */
+.fa-bell:hover,
+.fa-envelope:hover {
+    background-color: #1c5ca9;
+}
+
+/* Smooth transition effect */
+.fa:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+/* Profile icon container */
+.profile-icon-container {
+    font-size: 24px;
+    position: relative;
+}
+
+.menu-bar {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: auto; /* Set width to auto */
+    min-width: 150px; /* Set a minimum width to ensure it's not too narrow */
+    z-index: 5;
+}
+
+
+.menu-bar a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 5px 0;
+}
+
+.menu-bar a:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-icon-container:hover .menu-bar {
+    display: block;
+}
+
+/* Hover effect for the profile icon */
+.profile-icon:hover .fa-user {
+    color: #2169cc; /* Change color on hover */
+}
+.fa-circle-plus {
+    font-size: 24px; /* Adjust the icon size */
+    color: #fff; /* Set the color of the circle plus icon */
+    background-color: #2169cc; /* Set the background color */
+    padding: 8px; /* Add padding around the icon */
+    border-radius: 50%; /* Make the icon circular */
+    margin-left: 10px; /* Add margin between the notification icon and the circle plus icon */
+}
+
+/* Hover effect for the circle plus icon */
+.fa-circle-plus:hover {
+    background-color: #1c5ca9; /* Change background color on hover */
+}
+

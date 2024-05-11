@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { AdsComponent } from './Components/ads/ads.component';
 import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-sidebar.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { SearchComponent } from './Components/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     SidebarComponent,
     FileUploadComponent,
     AdsComponent,
-    FiltersSidebarComponent
+    FiltersSidebarComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

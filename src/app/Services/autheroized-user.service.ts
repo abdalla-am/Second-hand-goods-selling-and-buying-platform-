@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
@@ -12,6 +12,9 @@ export class AutheroizedUserService {
   private loggedInUserSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loggedInUser$: Observable<boolean> = this.loggedInUserSubject.asObservable();
   private currentUser: firebase.User | null = null;
+  private logoutEventSubject: Subject<void> = new Subject<void>();
+  logoutEvent$: Observable<void> = this.logoutEventSubject.asObservable();
+  loginError: boolean = false; // Add this property
 
   constructor(private fireauth: AngularFireAuth, private router: Router , private db: AngularFireDatabase) {
     this.fireauth.authState.subscribe(user => {
@@ -28,14 +31,15 @@ export class AutheroizedUserService {
         localStorage.setItem('userID', userID);
         // Navigate to the home page first
         this.router.navigate(['/']);
+        this.loginError = false; // Reset loginError on successful login
       }
     } catch (err: any) {
       console.error('Login error:', err);
+      this.loginError = true; // Set loginError to true on login error
       alert("Something went wrong");
       this.router.navigate(['/Login']);
     }
   }
-
   async register(email: string, password: string, additionalData: any): Promise<void> {
     try {
       const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
@@ -69,6 +73,7 @@ export class AutheroizedUserService {
       await this.fireauth.signOut();
       localStorage.removeItem('userID');
       this.router.navigate(['/']);
+      this.logoutEventSubject.next(); // Emit logout event
     } catch (err: any) {
       console.error('Logout error:', err);
       alert(err.message);

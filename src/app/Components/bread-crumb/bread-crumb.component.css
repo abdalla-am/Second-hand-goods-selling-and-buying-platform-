@@ -1,28 +1,49 @@
 .breadcrumb-container {
-    position: relative;
-    width: 100%;
-    height: 100%; /* Make sure it fills the container */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  position: relative;
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  background-image: url('../../../assets/EditProfile/breadcrumbs.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
+
 .breadcrumb-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(25, 31, 51, 0.247), rgba(25, 31, 51, 0.307));
-    z-index: 1; /* Ensure the gradient is above the image */
-  }
-  
-.breadcrumb-container {
-    background-image: url('../../../assets/EditProfile/breadcrumbs.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
-    padding: 60px 0;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-  }
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1; /* Ensure the overlay is above the image */
+}
+
+.section-title {
+  color: white; /* Text color */
+  font-size: 24px; /* Font size */
+  z-index: 2; /* Ensure title is above the overlay */
+  margin-bottom: 20px; /* Adjust spacing */
+}
+
+.breadcrumbs {
+  display: flex; /* Display as flex container */
+  align-items: center; /* Align items horizontally */
+  z-index: 2; /* Ensure breadcrumbs are above the overlay */
+}
+
+.breadcrumb-item {
+  color: white; /* Text color */
+  font-size: 16px; /* Font size */
+  margin-right: 5px; /* Adjust spacing between items */
+}
+
+.breadcrumb-separator {
+  color: white; /* Separator color */
+  font-size: 16px; /* Font size */
+}
