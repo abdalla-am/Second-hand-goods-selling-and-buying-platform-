@@ -34,29 +34,32 @@ export class AutheroizedUserService {
       this.router.navigate(['/Login']);
     }
   }
-    
+
   async register(email: string, password: string): Promise<void> {
     try {
       const res = await this.fireauth.createUserWithEmailAndPassword(email, password);
       if (res.user) {
+        // Extract UID from the authentication response
         const userID = res.user.uid;
-        // Store the userID in localStorage
+        // Save user ID in local storage
         localStorage.setItem('userID', userID);
-        alert('Registration Successful');
+        // Navigate to the login page after successful registration
         this.router.navigate(['/Login']);
+      } else {
+        throw new Error("User registration failed");
       }
     } catch (err: any) {
       console.error('Registration error:', err);
       alert("Something went wrong");
-      this.router.navigate(['/register']);
+      this.router.navigate(['/SignUp']);
     }
   }
-  
+
   async logout(): Promise<void> {
     try {
       await this.fireauth.signOut();
       localStorage.removeItem('userID');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/Login']);
     } catch (err: any) {
       console.error('Logout error:', err);
       alert(err.message);

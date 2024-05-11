@@ -8,25 +8,21 @@ import { User, getAuth } from "firebase/auth";
   providedIn: 'root'
 })
 export class UsersService {
-  database = getDatabase();
-  auth = getAuth();
-  currentUser$: Observable<User | null>;
+  constructor(private db: AngularFireDatabase) {}
 
-  constructor(private db: AngularFireDatabase) {
-    this.currentUser$ = new Observable(subscriber => {
-      const unsubscribe = this.auth.onAuthStateChanged(user => {
-        subscriber.next(user);
-      });
-      return unsubscribe;
-    });
-  }
-
-  getCurrentUserID(): string | null {
-    const currentUser = this.auth.currentUser;
-    return currentUser ? currentUser.uid : null;
-  }
-
-  getUserDetails(uid: string): Observable<any> {
+  getUserData(uid: string): Observable<any> {
+    // Assuming you have a 'users' node in your database where user data is stored
     return this.db.object(`/users/${uid}`).valueChanges();
+  }
+
+  getUserName(uid: string): Observable<string> {
+    return new Observable<string>((observer) => {
+      const userRef = ref(getDatabase(), `/users/${uid}/full_name`);
+      onValue(userRef, (snapshot) => {
+        const name = snapshot.val();
+        observer.next(name);
+        observer.complete();
+      });
+    });
   }
 }

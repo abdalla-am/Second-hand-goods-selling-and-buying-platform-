@@ -1,6 +1,8 @@
 import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentRef, Type, OnInit } from '@angular/core';
 import { AutheroizedUserService } from '../../Services/autheroized-user.service';
 import { Router } from '@angular/router';
+import { getAuth } from 'firebase/auth';
+import { UsersService } from '../../Services/users.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,10 +10,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent{
-  constructor(private router: Router, private authService: AutheroizedUserService) {} // Inject Router and AuthorizedUserService
+  constructor(private router: Router, private authService: AutheroizedUserService , private userService: UsersService) {} // Inject Router and AuthorizedUserService
   
   activeMenuItem: string | null = null;
   userName: string | null = null; // Variable to hold the user's name
+  ngOnInit(): void {
+    const auth = getAuth();
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.userService.getUserName(user.uid).subscribe((name) => {
+          this.userName = name;
+        });
+      } else {
+        // User is signed out.
+        // Handle accordingly
+      }
+    });
+  }
 
   selectMenuItem(menuItem: string) {
     this.activeMenuItem = menuItem;
