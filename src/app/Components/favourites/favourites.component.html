@@ -1,18 +1,20 @@
-<div class="ads-filter">
+<div class="Myads-filter">
+  <!-- Search bar -->
   <div class="search-bar">
-    <input type="text" placeholder="Search...">
+    <input type="text" placeholder="Search..." [(ngModel)]="searchText">
     <button><i class="fas fa-search"></i></button>
   </div>
+  
+  <!-- Filter options -->
   <div class="filter-options">
-    <select>
-      <option *ngFor="let category of categories" [value]="category.value">
+    <select [(ngModel)]="selectedCategory" (change)="filterByCategory()">
+      <option *ngFor="let category of categories" [value]="category.label">
         {{ category.label }}
       </option>
     </select>
     <!-- Add other filter options -->
   </div>
 </div>
-
 <div class="ads-table">
   <table>
     <thead>
@@ -25,17 +27,32 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ad of favourites">
+      <tr *ngFor="let ad of filteredAds">
         <td>{{ ad.title }}</td>
-        <td>{{ ad.Date_created | date:'dd-MM-yyyy' }}</td>
+        <td>{{ ad.Date_created }}</td>
         <td>{{ ad.price }}</td>
-        <td [ngStyle]="{'color': ad.status === 'Active' ? 'green' : 'red'}">{{ ad.status }}</td>
+        <td>{{ ad.Category }}</td>
+        <td [style.color]="ad.status === 'Active' ? 'green' : 'red'">{{ ad.status }}</td>
         <td>
-          <button>
-            <i class="fas fa-heart"></i>
+          <button (click)="toggleFavorite(ad)">
+            <i class="fas fa-heart" [class.favorite]="ad.isFavorite"></i>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<nav aria-label="Pagination" class="pagination-container">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" href="javascript:void(0)" (click)="previousPage()" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item" *ngFor="let page of totalPagesArray()" [class.active]="currentPage === page">
+      <a class="page-link" href="javascript:void(0)" (click)="setPage(page)">{{ page }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" href="javascript:void(0)" (click)="nextPage()">Next</a>
+    </li>
+  </ul>
+</nav>

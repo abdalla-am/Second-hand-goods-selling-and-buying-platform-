@@ -86,7 +86,7 @@ export class EditProfileComponent implements OnInit {
       if (confirm('Are you sure you want to delete your account?')) {
         this.authService.deleteAccount()
           .then(() => {
-            this.usersService.deleteUserData(uid).subscribe(() => {
+            this.authService.deleteUserData(uid).subscribe(() => {
               alert('Account deleted successfully');
               console.log('Account deleted successfully');
               // Redirect or perform any other action

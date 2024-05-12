@@ -1,4 +1,4 @@
-.ads-filter {
+.Myads-filter {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,12 +26,15 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
 .filter-options select {
   padding: 8px;
   border: 1px solid #EBEEF7;
   border-radius: 4px;
   margin-right: 8px;
+}
+/* Table Styles */
+.ads-table {
+  width: 100%;
 }
 
 .ads-table table {
@@ -65,4 +68,49 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+/* Pagination Styles */
+.pagination-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}
+
+.page-link:focus {
+  outline: none;
+}
+
+.page-link.disabled {
+  pointer-events: none;
+  background-color: #eee;
+  color: #999;
+}
+
+.page-link.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
 }

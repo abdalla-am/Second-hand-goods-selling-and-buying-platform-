@@ -2,21 +2,23 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { getDatabase, ref, onValue, remove } from "firebase/database";
 import { User, getAuth } from "firebase/auth";
-import { Observable, throwError } from 'rxjs';
+import { Observable, from, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { UserData } from '../Interfaces/user';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  constructor(private db: AngularFireDatabase) {}
+  LoggedInUserData : any;
+  constructor(private db: AngularFireDatabase , private http: HttpClient) {}
+  private baseUrl = 'https://second-hand-sellingandbuying-default-rtdb.firebaseio.com';
 
-  getUserData(uid: string): Observable<any> {
-    // Assuming you have a 'users' node in your database where user data is stored
-    return this.db.object(`/users/${uid}`).valueChanges();
+  getUserData(uid: string): Observable<UserData> {
+    return this.db.object(`/users/${uid}`).valueChanges() as Observable<UserData>;
   }
-
   getUserName(uid: string): Observable<string> {
     return new Observable<string>((observer) => {
       const userRef = ref(getDatabase(), `/users/${uid}/full_name`);
@@ -54,12 +56,16 @@ export class UsersService {
       const favouriteListRef = ref(getDatabase(), `/users/${uid}/FavoriteList`);
       onValue(favouriteListRef, (snapshot) => {
         const favourites = snapshot.val();
-        alert(favourites);
         observer.next(favourites);
         observer.complete();
       });
     });
   }
+  updateFavouriteList(userId: string, favoriteItems: string[]): Observable<void> {
+    const userRef = this.db.object(`users/${userId}`);
+    return from(userRef.update({ FavoriteList: favoriteItems }));
+  }
+
   deleteUserData(uid: string): Observable<void> {
     const userRef = this.db.object(`/users/${uid}`);
 

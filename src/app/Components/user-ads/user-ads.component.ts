@@ -1,30 +1,34 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AutheroizedUserService } from '../../Services/autheroized-user.service';
-import { Subscription } from 'rxjs';
-import { CategoriesService } from '../../Services/categories.service';
-import { AdvertisementService } from '../../Services/advertisement.service';
 import { UserAdsService } from '../../Services/user-ads.service';
+import { CategoriesService } from '../../Services/categories.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-user-ads',
   templateUrl: './user-ads.component.html',
   styleUrls: ['./user-ads.component.css']
 })
-export class UserAdsComponent {
+export class UserAdsComponent implements OnDestroy {
   categories: { value: string; label: string; icon: string; ads: number; }[] = [];
-  userAds: any[] = []; // Array to store user's ads
+  userAds: any[] = [];
   searchText: string = '';
   selectedCategory: string = '';
   filteredAds: any[] = [];
   adsSubscription: Subscription | undefined;
+  pageSize: number = 10;
+  currentPage: number = 1;
+  totalItems: number = 0;
 
-  constructor(private advertisementService: UserAdsService , private categoryService: CategoriesService) { }
+  constructor(private advertisementService: UserAdsService, private categoryService: CategoriesService) { }
+
   ngOnInit(): void {
     this.categories = this.categoryService.getCategories();
     this.adsSubscription = this.advertisementService.getAdvertisementsForCurrentUser().subscribe(
       (ads: any[]) => {
         this.userAds = ads;
-         this.filterAds(); // Initial filtering
-        console.log('User Ads:', this.userAds); // Log userAds array to the console
+        this.totalItems = this.userAds.length;
+        this.filterAds();
+        console.log('User Ads:', this.userAds);
       },
       error => {
         console.error('Error fetching user ads:', error);
@@ -33,23 +37,56 @@ export class UserAdsComponent {
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe from the adsSubscription to prevent memory leaks
     if (this.adsSubscription) {
       this.adsSubscription.unsubscribe();
     }
   }
+
   filterByCategory(): void {
+    this.currentPage = 1;
     this.filterAds();
   }
 
-private filterAds(): void {
-  if (!this.selectedCategory || this.selectedCategory === 'All Categories') {
-    this.filteredAds = this.userAds; // No category selected, show all ads
-  } else {
-    this.filteredAds = this.userAds.filter(ad =>ad.Category === this.selectedCategory);
+  private filterAds(): void {
+    if (!this.selectedCategory || this.selectedCategory === 'All Categories') {
+      this.filteredAds = this.userAds;
+    } else {
+      this.filteredAds = this.userAds.filter(ad => ad.Category === this.selectedCategory);
+    }
   }
-}
-  // Other methods for interacting with ads
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    const totalPages = Math.ceil(this.totalItems / this.pageSize);
+    if (this.currentPage < totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  setPage(page: number): void {
+    if (page >= 1 && page <= Math.ceil(this.totalItems / this.pageSize)) {
+      this.currentPage = page;
+    }
+  }
+
+  totalPagesArray(): number[] {
+    const totalPages = Math.ceil(this.totalItems / this.pageSize);
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  getCurrentPageAds(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.filteredAds.slice(startIndex, endIndex);
+  }
+  get totalPages(): number {
+    return Math.ceil(Object.values(this.filteredAds).length / this.pageSize);
+  }
   toggleDropdown(ad: any, show: boolean) {
     ad.showDropdown = show;
   }

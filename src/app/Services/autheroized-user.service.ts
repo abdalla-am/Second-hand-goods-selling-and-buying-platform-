@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, Subscription, catchError, throwError } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { UsersService } from './users.service';
+import { UserData } from '../Interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +17,15 @@ export class AutheroizedUserService {
   private logoutEventSubject: Subject<void> = new Subject<void>();
   logoutEvent$: Observable<void> = this.logoutEventSubject.asObservable();
   loginError: boolean = false; // Add this property
+  user$: any;
+  userData: UserData | undefined;
+  userDataSubscription: Subscription | undefined;
 
-  constructor(private fireauth: AngularFireAuth, private router: Router , private db: AngularFireDatabase) {
+  constructor(private fireauth: AngularFireAuth, 
+    private router: Router , 
+    private db: AngularFireDatabase , 
+    private userService : UsersService ,
+    private afAuth: AngularFireAuth) {
     this.fireauth.authState.subscribe(user => {
       this.currentUser = user;
       this.loggedInUserSubject.next(!!user);
@@ -29,6 +38,9 @@ export class AutheroizedUserService {
       const userID = this.getLoggedInUserID();
       if (userID) {
         localStorage.setItem('userID', userID);
+        this.userDataSubscription = this.userService.getUserData(userID).subscribe(data => {
+          this.userData = data;
+        });
         // Navigate to the home page first
         this.router.navigate(['/']);
         this.loginError = false; // Reset loginError on successful login
@@ -79,6 +91,24 @@ export class AutheroizedUserService {
       alert(err.message);
     }
   }
+  // New method to delete user data from the database
+  deleteUserData(uid: string): Observable<void> {
+    return this.userService.deleteUserData(uid).pipe(
+      catchError((error) => {
+        console.error('Error deleting user data:', error);
+        return throwError(error);
+      })
+    );
+  }
+  deleteAccount(): Promise<void> {
+    return this.afAuth.currentUser.then(user => {
+      if (user) {
+        return user.delete();
+      } else {
+        throw new Error("No user signed in");
+      }
+    });
+  }
 
   isLoggedIn(): boolean {
     return !!this.currentUser;
@@ -101,12 +131,4 @@ export class AutheroizedUserService {
     }
   }
 
-  deleteAccount(): Promise<void> {
-    const user = this.currentUser;
-    if (user) {
-      return user.delete();
-    } else {
-      return Promise.reject(new Error('User not authenticated'));
-    }
-  }
 }
