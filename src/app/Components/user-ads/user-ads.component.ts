@@ -17,25 +17,38 @@ export class UserAdsComponent {
   filteredAds: any[] = [];
   adsSubscription: Subscription | undefined;
 
-  constructor(private advertisementService: UserAdsService) { }
-
+  constructor(private advertisementService: UserAdsService , private categoryService: CategoriesService) { }
   ngOnInit(): void {
+    this.categories = this.categoryService.getCategories();
     this.adsSubscription = this.advertisementService.getAdvertisementsForCurrentUser().subscribe(
-      ads => {
-        this.userAds = ads ? Object.values(ads) : [];
+      (ads: any[]) => {
+        this.userAds = ads;
+         this.filterAds(); // Initial filtering
+        console.log('User Ads:', this.userAds); // Log userAds array to the console
       },
       error => {
-        console.error('Error fetching advertisements:', error);
+        console.error('Error fetching user ads:', error);
       }
     );
   }
 
   ngOnDestroy(): void {
+    // Unsubscribe from the adsSubscription to prevent memory leaks
     if (this.adsSubscription) {
       this.adsSubscription.unsubscribe();
     }
   }
+  filterByCategory(): void {
+    this.filterAds();
+  }
 
+private filterAds(): void {
+  if (!this.selectedCategory || this.selectedCategory === 'All Categories') {
+    this.filteredAds = this.userAds; // No category selected, show all ads
+  } else {
+    this.filteredAds = this.userAds.filter(ad =>ad.Category === this.selectedCategory);
+  }
+}
   // Other methods for interacting with ads
   toggleDropdown(ad: any, show: boolean) {
     ad.showDropdown = show;

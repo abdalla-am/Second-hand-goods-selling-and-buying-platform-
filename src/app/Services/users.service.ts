@@ -49,6 +49,17 @@ export class UsersService {
       })
     );
   }
+  getFavouriteList(uid: string): Observable<string[]> {
+    return new Observable<string[]>((observer) => {
+      const favouriteListRef = ref(getDatabase(), `/users/${uid}/FavoriteList`);
+      onValue(favouriteListRef, (snapshot) => {
+        const favourites = snapshot.val();
+        alert(favourites);
+        observer.next(favourites);
+        observer.complete();
+      });
+    });
+  }
   deleteUserData(uid: string): Observable<void> {
     const userRef = this.db.object(`/users/${uid}`);
 

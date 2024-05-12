@@ -15,6 +15,10 @@ export class AdvertisementService {
     const url = `${this.baseUrl}/${this.adsEndpoint}`;
     return this.http.get<any>(url);
   }
+  getAdvertisementById(adId: string): Observable<any> {
+    const url = `${this.baseUrl}/ads/${adId}.json`;
+    return this.http.get<any>(url);
+  }
   getAdvertisementsByCategory(category: string): Observable<any> {
     const url = `${this.baseUrl}/${this.adsEndpoint}?orderBy="category"&equalTo="${category}"`;
     return this.http.get<any>(url);
@@ -45,12 +49,16 @@ export class AdvertisementService {
 
     return this.http.get<any>(url);
   }
-  getAdvertisementsByUser(userID: string): Observable<any[]> {
-    alert(userID);
-    const url = `${this.baseUrl}/${this.adsEndpoint}?orderBy="authorID"&equalTo="${userID}"`;
-    alert(url);
-    return this.http.get<any[]>(url);
+  getAdvertisementsByUser(userId: string): Observable<any[]> {
+    const url = `${this.baseUrl}/${this.adsEndpoint}`;
+    return this.http.get<any[]>(url).pipe(
+      map(ads => {
+        // Filter ads by authorID equal to userId
+        return Object.values(ads).filter(ad => ad.authorID === userId);
+      })
+    );
   }
+  
   searchAdvertisements(keyword: string): Observable<any> {
     const url = `${this.baseUrl}/${this.adsEndpoint}?orderBy="title"&startAt="${keyword}"&endAt="${keyword}\uf8ff"`;
     return this.http.get<any>(url);

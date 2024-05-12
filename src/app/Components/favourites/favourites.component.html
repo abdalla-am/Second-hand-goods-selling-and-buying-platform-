@@ -25,15 +25,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of items">
-        <td>{{ item.name }}</td>
-        <td>{{ item.date }}</td>
-        <td>{{ item.price }}</td>
-        <td [ngStyle]="{'color' : item.status === 'Active' ? 'green' : 'red' }">{{ item.status }}</td>
+      <tr *ngFor="let ad of favourites">
+        <td>{{ ad.title }}</td>
+        <td>{{ ad.Date_created | date:'dd-MM-yyyy' }}</td>
+        <td>{{ ad.price }}</td>
+        <td [ngStyle]="{'color': ad.status === 'Active' ? 'green' : 'red'}">{{ ad.status }}</td>
         <td>
-          <button (click)="toggleFavorite(item.name)">
+          <button>
             <i class="fas fa-heart"></i>
-          </button>          
+          </button>
         </td>
       </tr>
     </tbody>

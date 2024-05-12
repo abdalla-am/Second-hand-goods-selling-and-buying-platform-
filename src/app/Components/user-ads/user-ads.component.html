@@ -4,9 +4,8 @@
     <button><i class="fas fa-search"></i></button>
   </div>
   <div class="filter-options">
-    <select [(ngModel)]="selectedCategory">
-      <option value="">All Categories</option>
-      <option *ngFor="let category of categories" [value]="category.value">
+    <select [(ngModel)]="selectedCategory" (change)="filterByCategory()">
+      <option *ngFor="let category of categories" [value]="category.label">
         {{ category.label }}
       </option>
     </select>
@@ -25,11 +24,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ad of userAds">
+      <tr *ngFor="let ad of filteredAds">
         <td>{{ ad.title}}</td>
-        <td>{{ ad.Date_created}}</td>
+        <td>{{ ad.Date_created | date:'dd-MM-yyyy' }}</td>
         <td>{{ ad.price}}</td>
-        <td>{{ ad.status}}</td>
+        <td [ngStyle]="{'color' : ad.status === 'Active' ? 'green' : 'red' }" >{{ ad.status}}</td>
         <td class="Action">
           <button (click)="editAd(ad)">Edit</button>
           <div class="dropdown" (mouseenter)="toggleDropdown(ad, true)" (mouseleave)="toggleDropdown(ad, false)">
