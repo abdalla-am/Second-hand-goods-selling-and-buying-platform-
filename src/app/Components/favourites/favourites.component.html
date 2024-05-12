@@ -1,10 +1,17 @@
 <div class="Myads-filter">
+
+
+
   <!-- Search bar -->
   <div class="search-bar">
-    <input type="text" placeholder="Search..." [(ngModel)]="searchText">
-    <button><i class="fas fa-search"></i></button>
+    <!-- <input type="text" placeholder="Search..." [(ngModel)]="searchText"> -->
+    <input type="text" placeholder="Search..." [(ngModel)]="searchText" (input)="filterAds()">
+    <!-- <button><i class="fas fa-search"></i></button> -->
+    <button (click)="filterAds()"><i class="fas fa-search"></i></button>
   </div>
   
+
+
   <!-- Filter options -->
   <div class="filter-options">
     <select [(ngModel)]="selectedCategory" (change)="filterByCategory()">

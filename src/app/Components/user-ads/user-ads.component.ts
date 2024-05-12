@@ -47,11 +47,22 @@ export class UserAdsComponent implements OnDestroy {
     this.filterAds();
   }
 
-  private filterAds(): void {
+ filterAds(): void {
+
     if (!this.selectedCategory || this.selectedCategory === 'All Categories') {
       this.filteredAds = this.userAds;
     } else {
       this.filteredAds = this.userAds.filter(ad => ad.Category === this.selectedCategory);
+    }
+
+    //for search bar :
+    if (this.searchText) {
+      const searchTextLower = this.searchText.toLowerCase();
+      // this.filteredAds = this.filteredAds.filter((ad) =>
+      //   ad.title.toLowerCase().includes(searchTextLower)
+      this.filteredAds = this.filteredAds.filter((ad) =>
+        ad.title.toLowerCase().startsWith(searchTextLower)
+      );
     }
   }
 
