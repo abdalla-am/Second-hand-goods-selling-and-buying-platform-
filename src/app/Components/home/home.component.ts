@@ -14,7 +14,6 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.categories = this.categoryService.getCategories();
-    
   }
   navigateToAds(category: string) {
     this.router.navigate(['/ads', category]); // Navigate to the ads component with the selected category

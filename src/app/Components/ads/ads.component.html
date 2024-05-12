@@ -2,11 +2,30 @@
   <aside class="sidebar" *ngIf="showSidebar">
     <app-filters-sidebar></app-filters-sidebar>
   </aside>
+
+
+
+  <!-- Search bar -->
+ <div class="search-container">
+  <div class="search-center">
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="searchText"
+        (input)="ngOnChanges()"
+      />
+      <button (click)="ngOnChanges()"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+</div>
+
+
   <div class="ad-grid">
-    <div class="ad-container" *ngFor="let ad of pagedAds let i = index">
+    <div class="ad-container" *ngFor="let ad of pagedAds; let i = index">
       <div class="ad-card">
         <div class="ad-details">
-          <img [src]="ad.imageURL" alt="Ad Image" class="ad-image">
+          <img [src]="ad.imageURL" alt="Ad Image" class="ad-image" />
           <div class="ad-info">
             <p class="ad-description">{{ ad.Category }}</p>
             <h2 class="ad-title">{{ ad.title }}</h2>
@@ -14,7 +33,11 @@
             <p class="ad-price">{{ ad.price }}</p>
             <p class="ad-category">{{ ad.category }}</p>
             <p>Index: {{ i }}</p>
-            <i class="fa-regular fa-heart ad-favorite-icon" [ngClass]="{'favorited': ad.favorite}" (click)="toggleFavorite(ad)"></i>
+            <i
+              class="fa-regular fa-heart ad-favorite-icon"
+              [ngClass]="{ favorited: ad.favorite }"
+              (click)="toggleFavorite(ad)"
+            ></i>
           </div>
         </div>
       </div>
@@ -24,13 +47,27 @@
 <nav aria-label="Pagination" class="pagination-container">
   <ul class="pagination">
     <li class="page-item" [class.disabled]="currentPage === 1">
-      <a class="page-link" href="javascript:void(0)" (click)="previousPage()" tabindex="-1">Previous</a>
+      <a
+        class="page-link"
+        href="javascript:void(0)"
+        (click)="previousPage()"
+        tabindex="-1"
+        >Previous</a
+      >
     </li>
-    <li class="page-item" *ngFor="let page of pages" [class.active]="currentPage === page">
-      <a class="page-link" href="javascript:void(0)" (click)="setPage(page)">{{ page }}</a>
+    <li
+      class="page-item"
+      *ngFor="let page of pages"
+      [class.active]="currentPage === page"
+    >
+      <a class="page-link" href="javascript:void(0)" (click)="setPage(page)">{{
+        page
+      }}</a>
     </li>
     <li class="page-item" [class.disabled]="currentPage === totalPages">
-      <a class="page-link" href="javascript:void(0)" (click)="nextPage()">Next</a>
+      <a class="page-link" href="javascript:void(0)" (click)="nextPage()"
+        >Next</a
+      >
     </li>
   </ul>
 </nav>

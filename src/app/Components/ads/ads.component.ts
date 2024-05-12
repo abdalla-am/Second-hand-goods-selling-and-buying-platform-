@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild ,OnChanges } from '@angular/core';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from '../../Services/categories.service';
@@ -12,10 +12,10 @@ import { AutheroizedUserService } from '../../Services/autheroized-user.service'
   templateUrl: './ads.component.html',
   styleUrls: ['./ads.component.css']
 })
-export class AdsComponent implements OnInit {
+export class AdsComponent implements OnInit ,OnChanges  {
   @ViewChild(SearchComponent) searchComponent: SearchComponent | undefined;
   ads: { [id: string]: any } = {}; // Map IDs to ads
-  filteredAds: any[] = [];
+  
   pagedAds: any[] = [];
   selectedCategory: string = '';
   currentPage: number = 1;
@@ -23,6 +23,10 @@ export class AdsComponent implements OnInit {
   showSidebar: boolean = false;
   favoriteItems: any[] = []; 
   isFavoriteBeingToggled: boolean | undefined;
+
+  filteredAds: any[] = [];
+  searchText: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private adService: AdvertisementService,
@@ -32,7 +36,9 @@ export class AdsComponent implements OnInit {
     private auth : AutheroizedUserService
   ) { }
 
+
   ngOnInit(): void {
+
     this.adService.getAdvertisements().subscribe(data => {
       if (typeof data === 'object' && data !== null) {
         // Map IDs to ads
@@ -54,6 +60,7 @@ export class AdsComponent implements OnInit {
             this.filteredAds = Object.values(data);
             this.showSidebar = false;
           }
+          this.ngOnChanges();
           this.setPage(1);
         });
       } else {
@@ -66,7 +73,9 @@ export class AdsComponent implements OnInit {
     this.searchService.searchResults$.subscribe(searchResults => {
       // If search results are available, filter the advertisements
       if (searchResults.length > 0) {
-        this.filteredAds = Object.values(this.ads).filter(ad => this.containsSearchTerm(ad, searchResults));
+        this.ngOnChanges();
+        // this.filteredAds = Object.values(this.ads).filter(ad => this.containsSearchTerm(ad, searchResults));
+        
       } else {
         // If search results are empty, show all advertisements
         this.filteredAds = Object.values(this.ads);
@@ -75,16 +84,61 @@ export class AdsComponent implements OnInit {
     });
   }
 
-  // Function to check if an advertisement contains the search term
-  containsSearchTerm(ad: any, searchResults: any[]): boolean {
-    // Check if any of the advertisement properties contain the search term
-    return Object.values(ad).some(value => {
-      if (typeof value === 'string') {
-        return searchResults.some(term => value.toLowerCase().includes(term.toLowerCase()));
+  
+  //acts as filterAds()
+  // ngOnChanges(): void {
+  //   const searchTextLower = this.searchText.toLowerCase();
+  //   if (this.searchText) {
+  //     // this.filteredAds = this.filteredAds.filter(ad => ad.title.toLowerCase().startsWith(searchTextLower));
+  //     this.filteredAds = Object.values(this.ads).filter(ad => ad.title.toLowerCase().startsWith(searchTextLower));
+  //   } 
+  //   else {
+  //     // Reset filteredAds to show all ads if search text is empty
+  //     this.filteredAds = Object.values(this.ads);
+  //   }
+  //   this.setPage(1);
+  //   this.setPage(this.currentPage);
+  // }
+
+
+  ngOnChanges(): void {
+    const searchTextLower = this.searchText.toLowerCase();
+    if (this.searchText) {
+      this.filteredAds = Object.values(this.ads).filter(ad => ad.title.toLowerCase().startsWith(searchTextLower));
+      if (this.filteredAds.length === 0) {
+        // Display a message or handle the scenario where no results are found
+        this.filteredAds = [];
+        alert('No ads found with the search term:  '+ this.searchText);
       }
-      return false;
-    });
+    } else {
+      // Reset filteredAds to show all ads if search text is empty
+      this.filteredAds = Object.values(this.ads);
+    }
+    this.setPage(1);
   }
+
+  
+  // filterAds(): void {
+  //   const searchTextLower = this.searchText.toLowerCase();
+  //   if (this.searchText) {
+  //     this.filteredAds = Object.values(this.ads).filter(ad => ad.title.toLowerCase().startsWith(searchTextLower));
+  //   } else {
+  //     // Reset filteredAds to show all ads if search text is empty
+  //     this.filteredAds = Object.values(this.ads);
+  //   }
+  // }
+
+
+  // // Function to check if an advertisement contains the search term
+  // containsSearchTerm(ad: any, searchResults: any[]): boolean {
+  //   // Check if any of the advertisement properties contain the search term
+  //   return Object.values(ad).some(value => {
+  //     if (typeof value === 'string') {
+  //       return searchResults.some(term => value.toLowerCase().includes(term.toLowerCase()));
+  //     }
+  //     return false;
+  //   });
+  // }
 
   // Function to handle filter changes emitted from FiltersSidebarComponent
   onFiltersChanged(filters: any): void {
@@ -111,7 +165,9 @@ export class AdsComponent implements OnInit {
     const endIndex = Math.min(startIndex + this.pageSize, this.filteredAds.length);
     this.pagedAds = this.filteredAds.slice(startIndex, endIndex);
     // Combine ads with their IDs
-    this.pagedAds = Object.keys(this.ads).slice(startIndex, endIndex).map(id => ({ id, ...this.ads[id] }));
+
+    //the following line of code makes the filter dont work properly 
+    //this.pagedAds = Object.keys(this.ads).slice(startIndex, endIndex).map(id => ({ id, ...this.ads[id] }));
 
   }
 

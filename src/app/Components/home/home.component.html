@@ -1,19 +1,31 @@
 <div class="CategoriesContainer">
   <div class="section">
-    <h2 class="section-title" style="text-align: center; margin: 10px;">Popular Categories</h2>
+    <h2 class="section-title" style="text-align: center; margin: 10px">
+      Popular Categories
+    </h2>
     <div class="category-grid">
-      <div class="category" *ngFor="let category of categories" (click)="navigateToAds(category.value)" >
+      <div
+        class="category"
+        *ngFor="let category of categories"
+        (click)="navigateToAds(category.value)"
+      >
         <div class="icon-container">
           <i class="{{ category.icon }}"></i>
         </div>
         <div class="category-details">
           <h3 class="category-name">{{ category.value }}</h3>
           <span class="category-ads-number">{{ category.ads }}</span>
-          <a class="category-ads">View Ads <i class="fas fa-arrow-right"></i></a>
+          <a class="category-ads"
+            >View Ads <i class="fas fa-arrow-right"></i
+          ></a>
         </div>
       </div>
     </div>
     <!-- Ads Section -->
-    <app-ads> </app-ads>
+
+    <app-ads></app-ads>
+
+
+    
   </div>
 </div>
