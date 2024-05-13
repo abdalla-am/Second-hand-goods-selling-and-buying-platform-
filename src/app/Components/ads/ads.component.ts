@@ -60,7 +60,7 @@ export class AdsComponent implements OnInit ,OnChanges  {
             this.filteredAds = Object.values(data);
             this.showSidebar = false;
           }
-          this.ngOnChanges();
+          //this.ngOnChanges();
           this.setPage(1);
         });
       } else {
