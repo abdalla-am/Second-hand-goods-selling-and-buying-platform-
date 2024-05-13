@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../Services/users.service';
 import { AutheroizedUserService } from '../../Services/autheroized-user.service';
 
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/operators';
+import { url } from 'inspector';
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -17,10 +22,18 @@ export class EditProfileComponent implements OnInit {
   currentPassword: string = '';
   newPassword: string = '';
   confirmPassword: string = '';
+  // photoURl:string='';
+
+
+  profileImageUrl: string | null = null;
+
+
 
   constructor(
     private usersService: UsersService,
-    private authService: AutheroizedUserService
+    private authService: AutheroizedUserService,
+    private storage: AngularFireStorage, 
+    private auth: AngularFireAuth
   ) {}
 
   ngOnInit() {
@@ -28,16 +41,48 @@ export class EditProfileComponent implements OnInit {
     if (uid) {
       this.usersService.getUserData(uid).subscribe((userData: any) => {
         if (userData) {
+          
+
+          //for photo component-------------------------------------------------------------------------------------------
+          this.storage.ref(`users/${uid}/profile.jpg`).getDownloadURL().subscribe(url => {this.profileImageUrl = url});
+          //alert('Profile Image URL:'+ this.profileImageUrl);
+          this.profileImageUrl =userData.photoURL;
+          //---------------------------------------------------------------------------------------------------------------
+
           this.fullName = userData.full_name || '';
           this.email = userData.email || '';
           this.phone = userData.phone || '';
           this.location = userData.location || '';
           this.website = userData.website || '';
           this.bio = userData.bio || '';
+          
         }
       });
     }
   }
+
+
+
+  //for photo ---------------------------------------------------------------------------------------
+  onFileSelected(event: any) {
+    const uid = this.authService.getLoggedInUserID();
+    const file = event.target.files[0];
+    const filePath = `users/${uid}/profile.jpg`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    // Upload the file and get the profile image URL
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(url => {
+          this.profileImageUrl = url;
+        });
+      })
+    ).subscribe();
+  }
+  //--------------------------------------------------------------------------------------------------
+
+
 
   saveChanges() {
     const uid = this.authService.getLoggedInUserID();
@@ -51,7 +96,7 @@ export class EditProfileComponent implements OnInit {
         bio: this.bio
       };
       this.usersService.updateUserData(uid, updatedUserData).subscribe(() => {
-        alert('User data updated successfully');
+        //alert('User data updated successfully');
         console.log('User data updated successfully');
       }, error => {
         console.error('Error updating user data:', error);

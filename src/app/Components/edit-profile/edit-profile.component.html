@@ -1,52 +1,147 @@
 <main class="main-content">
-    <section class="account-info">
-        <h1>Account Information</h1>
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" name="fullName" [(ngModel)]="fullName" placeholder="Abdalla Ayman Mohammed">
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="abdallaayman@gmail.com" disabled>
-            <!-- Disable email input to prevent editing -->
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" name="phone" [(ngModel)]="phone" placeholder="+20 1090923740">
-        </div>
-        <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" [(ngModel)]="location" placeholder="Maadi, Cairo Egypt">
-        </div>
-        <div class="form-group">
-            <label for="website">Website</label>
-            <input type="url" id="website" name="website" [(ngModel)]="website" placeholder="website url">
-        </div>
-        <div class="form-group">
-            <label for="bio">Biography</label>
-            <textarea id="bio" name="bio" [(ngModel)]="bio" placeholder="Write something about yourself"></textarea>
-        </div>
-        <button type="button" class="btn" (click)="saveChanges()">Save Changes</button>
-    </section>
-    <section class="password-change">
-        <h1>Change Password</h1>
-        <div class="form-group">
-            <label for="currentPassword">Current Password</label>
-            <input type="password" id="currentPassword" name="currentPassword" [(ngModel)]="currentPassword">
-        </div>
-        <div class="form-group">
-            <label for="newPassword">New Password</label>
-            <input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword">
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirm New Password</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword">
-        </div>
-        <button type="button" class="btn" (click)="changePassword()">Change Password</button>
-    </section>
-    <section class="account-deletion">
-        <h1>Delete Account</h1>
-        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
-        <button type="button" class="btn delete-btn" (click)="deleteAccount()">Delete Account</button>
-    </section>
+  <section class="account-info">
+    <h1>Account Information</h1>
+
+    <!-- profile photo: -->
+    <div class="edit-profile-photo-container">
+      <h2>Edit Profile Photo</h2>
+      <div class="profile-image-container">
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          id="fileInput"
+        />
+        <img
+          *ngIf="profileImageUrl"
+          [src]="profileImageUrl"
+          alt="Profile Image"
+        />
+        <label for="fileInput" class="choose-file-button">Choose file</label>
+      </div>
+      
+      <form (ngSubmit)="saveChanges()">
+        <button type="submit" class="btn">Save</button>
+      </form>
+      
+    </div>
+
+
+
+    <!-- <form (ngSubmit)="saveChanges()">
+      <input type="file" (change)="onFileSelected($event)" />
+      <button type="submit">Save</button>
+    </form>
+    <img *ngIf="profileImageUrl" [src]="profileImageUrl" alt="Profile Image" /> -->
+
+
+
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        id="fullName"
+        name="fullName"
+        [(ngModel)]="fullName"
+        placeholder="Abdalla Ayman Mohammed"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="abdallaayman@gmail.com"
+        disabled
+      />
+      <!-- Disable email input to prevent editing -->
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        [(ngModel)]="phone"
+        placeholder="+20 1090923740"
+      />
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input
+        type="text"
+        id="location"
+        name="location"
+        [(ngModel)]="location"
+        placeholder="Maadi, Cairo Egypt"
+      />
+    </div>
+    <div class="form-group">
+      <label for="website">Website</label>
+      <input
+        type="url"
+        id="website"
+        name="website"
+        [(ngModel)]="website"
+        placeholder="website url"
+      />
+    </div>
+    <div class="form-group">
+      <label for="bio">Biography</label>
+      <textarea
+        id="bio"
+        name="bio"
+        [(ngModel)]="bio"
+        placeholder="Write something about yourself"
+      ></textarea>
+    </div>
+    <button type="button" class="btn" (click)="saveChanges()">
+      Save Changes
+    </button>
+  </section>
+  <section class="password-change">
+    <h1>Change Password</h1>
+    <div class="form-group">
+      <label for="currentPassword">Current Password</label>
+      <input
+        type="password"
+        id="currentPassword"
+        name="currentPassword"
+        [(ngModel)]="currentPassword"
+      />
+    </div>
+    <div class="form-group">
+      <label for="newPassword">New Password</label>
+      <input
+        type="password"
+        id="newPassword"
+        name="newPassword"
+        [(ngModel)]="newPassword"
+      />
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm New Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
+      />
+    </div>
+    <button type="button" class="btn" (click)="changePassword()">
+      Change Password
+    </button>
+  </section>
+  <section class="account-deletion">
+    <h1>Delete Account</h1>
+    <p>
+      Are you sure you want to delete your account? This action cannot be
+      undone.
+    </p>
+    <button type="button" class="btn delete-btn" (click)="deleteAccount()">
+      Delete Account
+    </button>
+  </section>
 </main>
