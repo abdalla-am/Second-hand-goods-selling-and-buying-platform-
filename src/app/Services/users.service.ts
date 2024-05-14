@@ -12,12 +12,15 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UsersService {
+
   LoggedInUserData : any;
   constructor(private db: AngularFireDatabase , private http: HttpClient) {}
-  private baseUrl = 'https://second-hand-sellingandbuying-default-rtdb.firebaseio.com';
 
-  getUserData(uid: string): Observable<UserData> {
-    return this.db.object(`/users/${uid}`).valueChanges() as Observable<UserData>;
+  getUserData(uid: string): Observable<any> {
+    return this.db.object(`/users/${uid}`).valueChanges();
+  }
+  getAllUsersData(): Observable<any> {
+    return this.db.object(`/users`).valueChanges();
   }
   getUserName(uid: string): Observable<string> {
     return new Observable<string>((observer) => {
@@ -85,5 +88,14 @@ export class UsersService {
       })
     );
   }
-  
+  getUserFeedBack(uid: string): Observable<any[]> {
+    return new Observable<any[]>((observer) => {
+      const feedbackRef = ref(getDatabase(), `/users/${uid}/feedback`);
+      onValue(feedbackRef, (snapshot) => {
+        const feedback = snapshot.val();
+        observer.next(feedback);
+        observer.complete();
+      });
+    });
+  }
 }

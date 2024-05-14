@@ -15,7 +15,7 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Check if the route is authenticated
-        const authenticatedRoutes = ['/Favourites', '/Dashboard', '/EditProfile', '/NewPost', '/MyAds', '/Messages'];
+        const authenticatedRoutes = ['/Favourites', '/Dashboard', '/EditProfile', '/NewPost', '/MyAds', '/Messages' , '/FeedBack'];
         const isRouteAuthenticated = authenticatedRoutes.some(route => event.urlAfterRedirects.includes(route));
 
         if (isRouteAuthenticated) {

@@ -25,6 +25,7 @@ import { AdsComponent } from './Components/ads/ads.component';
 import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-sidebar.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SearchComponent } from './Components/search/search.component';
+import { FeedBackComponent } from './Components/feed-back/feed-back.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { SearchComponent } from './Components/search/search.component';
     FileUploadComponent,
     AdsComponent,
     FiltersSidebarComponent,
-    SearchComponent
+    SearchComponent,
+    FeedBackComponent
   ],
   imports: [
     BrowserModule,

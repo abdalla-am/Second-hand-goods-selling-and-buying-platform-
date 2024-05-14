@@ -3,6 +3,7 @@ import { AutheroizedUserService } from '../../Services/autheroized-user.service'
 import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 import { UsersService } from '../../Services/users.service';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,10 +11,14 @@ import { UsersService } from '../../Services/users.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent{
-  constructor(private router: Router, private authService: AutheroizedUserService , private userService: UsersService) {} // Inject Router and AuthorizedUserService
+  constructor(private router: Router,
+     private authService: AutheroizedUserService , 
+     private userService: UsersService,
+     private db: AngularFireDatabase) {} // Inject Router and AuthorizedUserService
   
   activeMenuItem: string | null = null;
   userName: string | null = null; // Variable to hold the user's name
+  imageUrl : string | undefined;
   ngOnInit(): void {
     const auth = getAuth();
     auth.onAuthStateChanged((user) => {

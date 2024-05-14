@@ -2,7 +2,7 @@
   <div class="container">
       <aside class="sidebar">
           <div class="profile-section">
-              <img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
+              <img [src]="imageUrl"  alt="Profile Picture" class="profile-picture">
               <h2><h2>{{ userName }}</h2></h2>
               <p>Member</p>
           </div>
@@ -11,6 +11,7 @@
             <a (click)="navigateTo('NewPost')" routerLinkActive="active" class="menu-item">Post Ads</a>
             <a (click)="navigateTo('MyAds')"  routerLinkActive="active" class="menu-item">My Ads</a>
             <a (click)="navigateTo('Favourites')"  routerLinkActive="active" class="menu-item">Favourite Ads</a>
+            <a (click)="navigateTo('FeedBack')"  routerLinkActive="active" class="menu-item">FeedBack</a>
             <a (click)="navigateTo('Messages')" routerLinkActive="active" class="menu-item">Messages</a>
             <a (click)="navigateTo('EditProfile')" routerLinkActive="active" class="menu-item">Setting</a>
             <a (click)="logout()" class="menu-item">Sign Out</a>

@@ -1,0 +1,13 @@
+<div class="feedback-list">
+    <div *ngFor="let item of feedback" class="feedback-item">
+      <div class="user-profile">
+        <img [src]="item.profilePic || 'assets/default-profile.jpg'" alt="Profile Picture">
+      </div>
+      <div class="feedback-details">
+        <h3>{{ item.userName }}</h3>
+        <p>{{ item.comment }}</p>
+        <p>Rating: {{ item.rating }}</p>
+      </div>
+    </div>
+  </div>
+  
