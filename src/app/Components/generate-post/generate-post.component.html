@@ -1,80 +1,56 @@
 <div class="product-container">
-  <div class="section-heading">Product Information</div>
-  <div class="product-details">
+    <div class="section-heading">Product Information</div>
+    <div class="product-details">
       <!-- Title -->
       <div class="detail-item">
-          <input type="text" class="detail-input" placeholder="Title">
+        <input type="text" class="detail-input" placeholder="Title" [(ngModel)]="ad.title">
       </div>
       <!-- Description -->
       <div class="detail-item">
-          <input type="text" class="detail-input" placeholder="Description">
+        <input type="text" class="detail-input" placeholder="Description" [(ngModel)]="ad.description">
+      </div>
       <!-- Category -->
       <div class="detail-item">
         <div class="detail-label">Choose Category</div>
         <div class="category-dropdown">
-            <select class="category-select">
-                <option *ngFor="let category of categories" [value]="category.value">
-                    {{ category.label }}
-                  </option>
-            </select>
+          <select class="category-select" [(ngModel)]="ad.category">
+            <option *ngFor="let category of categories" [value]="category.value">{{ category.label }}</option>
+          </select>
         </div>
       </div>
       <!-- Date -->
       <div class="detail-item">
-          <input type="date" class="date-input">
+        <input type="date" class="date-input" [(ngModel)]="ad.date_created">
       </div>
       <!-- Condition -->
       <div class="detail-item">
-          <div class="detail-label">Condition</div>
-          <div class="condition-dropdown">
-              <select class="condition-select">
-                  <option value="Excellent">Excellent</option>
-                  <option value="Very Good">Very Good</option>
-                  <option value="Good">Good</option>
-                  <option value="Fair">Fair</option>
-                  <option value="Poor">Poor</option>
-              </select>
-          </div>
+        <div class="detail-label">Condition</div>
+        <div class="condition-dropdown">
+          <select class="condition-select" [(ngModel)]="ad.condition">
+            <option value="Excellent">Excellent</option>
+            <option value="Very Good">Very Good</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+          </select>
+        </div>
       </div>
       <!-- Set a Price -->
       <div class="detail-item">
-          <input type="number" class="detail-input" placeholder="Set a Price">
+        <input type="number" class="detail-input" placeholder="Set a Price" [(ngModel)]="ad.price">
       </div>
       <!-- Location -->
       <div class="detail-item">
-          <input type="text" class="detail-input" placeholder="Location">
+        <input type="text" class="detail-input" placeholder="Location" [(ngModel)]="ad.location">
       </div>
-      </div>
+    </div>
+    <!-- File Upload -->
+    <div class="file-upload" id="fileUpload">
+      <!-- Assuming you have a custom file-upload component -->
+      <!-- Replace app-file-upload with your actual file upload component -->
+      <app-file-upload  (change)="onFileSelected($event)"></app-file-upload>
+    </div>
+    <!-- List Now Button -->
+    <button class="list-now-button" (click)="postAd()">List Now</button>
   </div>
-  <!-- File Upload -->
-  <div class="file-upload" id="fileUpload">
-      <app-file-upload></app-file-upload>
-  </div>
-  <!-- Share Contact Details -->
-  <div class="toggle-option">
-      <div class="option-label">Share Contact Details</div>
-      <label class="toggle-switch">
-          <input type="checkbox" class="toggle-checkbox">
-          <span class="slider"></span>
-      </label>
-  </div>
-  <!-- Allow to Chat -->
-  <div class="toggle-option">
-      <div class="option-label">Allow to Chat</div>
-      <label class="toggle-switch">
-          <input type="checkbox" class="toggle-checkbox">
-          <span class="slider"></span>
-      </label>
-  </div>
-  <!-- Allow to Offer -->
-  <div class="toggle-option">
-      <div class="option-label">Allow to Offer</div>
-      <label class="toggle-switch">
-          <input type="checkbox" class="toggle-checkbox">
-          <span class="slider"></span>
-      </label>
-  </div>
-
-  <!-- List Now Button -->
-  <button class="list-now-button">List Now</button>
-</div>
+  

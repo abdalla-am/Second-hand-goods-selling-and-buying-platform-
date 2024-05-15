@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class AdvertisementService {
   private baseUrl = 'https://second-hand-sellingandbuying-default-rtdb.firebaseio.com';
   private adsEndpoint = 'ads.json'; // Assuming '.json' extension for Firebase Realtime Database
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private db: AngularFireDatabase) { }
 
   getAdvertisements(): Observable<any> {
     const url = `${this.baseUrl}/${this.adsEndpoint}`;
@@ -58,7 +59,25 @@ export class AdvertisementService {
       })
     );
   }
-  
+  saveAd(ad: any , uid : string) {
+    // Generate a unique ID for the new ad
+    const adId = this.db.createPushId();
+    
+    // Set up the advertisement data
+    const newAd = {
+      Category: ad.category,
+      Date_created: ad.date_created,
+      authorID: uid, // Assuming you have a user ID for the author
+      condition: ad.condition,
+      description: ad.description,
+      price: ad.price,
+      status: 'Active',
+      title: ad.title
+    };
+
+    // Save the new advertisement to Firebase
+    return this.db.object(`ads/${adId}`).set(newAd);
+  }
   searchAdvertisements(keyword: string): Observable<any> {
     const url = `${this.baseUrl}/${this.adsEndpoint}?orderBy="title"&startAt="${keyword}"&endAt="${keyword}\uf8ff"`;
     return this.http.get<any>(url);
