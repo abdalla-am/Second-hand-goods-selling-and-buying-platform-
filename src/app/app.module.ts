@@ -26,6 +26,7 @@ import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-si
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SearchComponent } from './Components/search/search.component';
 import { FeedBackComponent } from './Components/feed-back/feed-back.component';
+
 @NgModule({
   declarations: [
     AppComponent,
