@@ -28,7 +28,6 @@ export class UserAdsComponent implements OnDestroy {
         this.userAds = ads;
         this.totalItems = this.userAds.length;
         this.filterAds();
-        console.log('User Ads:', this.userAds);
       },
       error => {
         console.error('Error fetching user ads:', error);

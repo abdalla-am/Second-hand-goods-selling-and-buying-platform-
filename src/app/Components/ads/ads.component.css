@@ -7,6 +7,116 @@
 .sidebar {
   width: 25%; /* Adjust width as needed */
 }
+/* Sidebar styling */
+.sidebar {
+  width: 250px; /* Adjust width as needed */
+  padding: 20px;
+}
+
+/* Filters container styling */
+.filters-container {
+  margin-bottom: 20px;
+}
+
+/* Header Section styling */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filters-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.clear-btn {
+  cursor: pointer;
+  color: #007bff;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.clear-btn:hover {
+  color: #0056b3;
+}
+
+/* Section title styling */
+.FilterHeader {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Inputs styling */
+.price-inputs {
+  display: flex; /* Use flexbox */
+  align-items: center; /* Align items vertically */
+}
+
+.price-inputs input[type="number"] {
+  width: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+/* Optional: Adjust the margin between the inputs */
+.price-inputs input[type="number"]:last-child {
+  margin-right: 0;
+}
+
+
+/* Checkbox styling */
+.location,
+.condition,
+.upload-date {
+  margin-bottom: 10px;
+}
+
+.location input[type="checkbox"],
+.condition input[type="checkbox"],
+.upload-date input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.location label,
+.condition label,
+.upload-date label {
+  font-size: 16px;
+  color: #444;
+  cursor: pointer;
+}
+
+.location label:hover,
+.condition label:hover,
+.upload-date label:hover {
+  color: #007bff;
+}
+
+/* Dropdown menu styling */
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  cursor: pointer;
+  appearance: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 
 .ad-grid {
   display: flex;

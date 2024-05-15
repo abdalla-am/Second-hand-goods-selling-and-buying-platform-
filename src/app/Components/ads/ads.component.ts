@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from '../../Services/categories.service';
@@ -6,6 +6,7 @@ import { SearchComponent } from '../search/search.component';
 import { SearchService } from '../../Services/search.service';
 import { UsersService } from '../../Services/users.service';
 import { AutheroizedUserService } from '../../Services/autheroized-user.service';
+import { GovernorateService } from '../../Services/governorate.service';
 
 @Component({
   selector: 'app-ads',
@@ -13,17 +14,21 @@ import { AutheroizedUserService } from '../../Services/autheroized-user.service'
   styleUrls: ['./ads.component.css']
 })
 export class AdsComponent implements OnInit, OnChanges {
-  @ViewChild(SearchComponent) searchComponent: SearchComponent | undefined;
   ads: { [id: string]: any } = {}; // Map IDs to ads
   pagedAds: any[] = [];
   selectedCategory: string = '';
   currentPage: number = 1;
   pageSize: number = 12;
   showSidebar: boolean = false;
-  favoriteItems: any[] = [];
-  isFavoriteBeingToggled: boolean | undefined;
   filteredAds: any[] = [];
   searchText: string = '';
+  minPrice: number | undefined;
+  maxPrice: number | undefined;
+  selectedGovernorate: string | undefined;
+  conditions: string[] = ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor'];
+  selectedConditions: string[] = []; 
+  government: any;
+  Allusers : any;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,14 +36,21 @@ export class AdsComponent implements OnInit, OnChanges {
     private categoryService: CategoriesService,
     private searchService: SearchService,
     private userService: UsersService,
-    private auth: AutheroizedUserService
+    private auth: AutheroizedUserService,
+    private governmentservice : GovernorateService
   ) { }
 
   ngOnInit(): void {
+    this.Allusers = this.userService.getAllUsersData();
+    this.government = this.governmentservice.getGovernorates();
+    // Fetch advertisements
     this.adService.getAdvertisements().subscribe(data => {
       if (typeof data === 'object' && data !== null) {
-        this.ads = data;
-        const adIds = Object.keys(data);
+        Object.keys(data).forEach(adId => {
+          const ad = data[adId];
+          ad.id = adId;
+          this.ads[adId] = ad;
+        });
         this.route.params.subscribe((params: { [x: string]: any; }) => {
           const categoryFromUrl = params['category'];
           if (categoryFromUrl) {
@@ -64,6 +76,7 @@ export class AdsComponent implements OnInit, OnChanges {
       console.error('Error fetching advertisements:', error);
     });
 
+    // Subscribe to search results
     this.searchService.searchResults$.subscribe(searchResults => {
       if (searchResults.length > 0) {
         this.ngOnChanges();
@@ -88,11 +101,43 @@ export class AdsComponent implements OnInit, OnChanges {
     this.setPage(1);
   }
 
-  onFiltersChanged(filters: any): void {
-    this.adService.getAdvertisementsBySidebarFilters(filters).subscribe(filteredAds => {
-      this.filteredAds = Object.values(filteredAds);
-      this.setPage(1);
+  onFiltersChanged(filters: { 
+    minPrice: number | undefined, 
+    maxPrice: number | undefined, 
+    selectedConditions: string[],
+    selectedGovernorate: string | undefined
+  }): void {
+    const { minPrice, maxPrice, selectedConditions, selectedGovernorate } = filters;
+    console.log(filters);
+    
+    this.filteredAds = Object.values(this.pagedAds).filter(ad => {
+      return (selectedConditions.length === 0 || selectedConditions.includes(ad.condition));
     });
+  
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      this.filteredAds = this.filteredAds.filter(ad => {
+        return ad.price >= minPrice && ad.price <= maxPrice;
+      });
+    }
+  
+    this.setPage(1);
+  }
+  clearFilters(): void {
+    // Clear filter fields
+    this.searchText = '';
+    this.minPrice = undefined;
+    this.maxPrice = undefined;
+    this.selectedConditions = [];
+    this.selectedGovernorate = undefined;
+  
+    // Reset filtered ads to all ads
+    this.filterAdsByCategory();
+    // Reset pagination to first page
+    this.setPage(1);
+  }
+  
+  isChecked(condition: string): boolean {
+    return this.selectedConditions.includes(condition);
   }
 
   filterAdsByCategory(): void {
@@ -111,7 +156,6 @@ export class AdsComponent implements OnInit, OnChanges {
     const startIndex = (page - 1) * this.pageSize;
     const endIndex = Math.min(startIndex + this.pageSize, this.filteredAds.length);
     this.pagedAds = this.filteredAds.slice(startIndex, endIndex);
-    this.pagedAds = Object.keys(this.ads).slice(startIndex, endIndex).map(id => ({ id, ...this.ads[id] }));
   }
 
   toggleFavorite(ad: any): void {
@@ -122,8 +166,6 @@ export class AdsComponent implements OnInit, OnChanges {
     }
 
     const adId = ad.id;
-    alert(adId);
-    console.log("Toggling favorite for advertisement ID:", adId);
     ad.favorite = !ad.favorite;
     const currentUser = this.auth.getCurrentUser();
     if (!currentUser) {
@@ -140,15 +182,11 @@ export class AdsComponent implements OnInit, OnChanges {
         const isAdFavorite = favoriteItems.includes(adId);
 
         // Toggle the favorite status only if there's a change
-        if (!isAdFavorite && !this.isFavoriteBeingToggled) {
-          this.isFavoriteBeingToggled = true; // Prevent recursive call
+        if (!isAdFavorite) {
           // Add ad to favorites if it's not already there
-          console.log("Adding advertisement to favorites:", adId);
           favoriteItems.push(adId);
-        } else if (isAdFavorite && !this.isFavoriteBeingToggled) {
-          this.isFavoriteBeingToggled = true; // Prevent recursive call
+        } else {
           // Remove ad from favorites if it's already there
-          console.log("Removing advertisement from favorites:", adId);
           const index = favoriteItems.indexOf(adId);
           if (index !== -1) {
             favoriteItems.splice(index, 1);
@@ -159,11 +197,9 @@ export class AdsComponent implements OnInit, OnChanges {
         this.userService.updateFavouriteList(userId, favoriteItems).subscribe(
           () => {
             console.log("Favorite list updated successfully.");
-            this.isFavoriteBeingToggled = false; // Reset the flag
           },
           error => {
             console.error("Error updating favorite list:", error);
-            this.isFavoriteBeingToggled = false; // Reset the flag in case of error
           }
         );
       },

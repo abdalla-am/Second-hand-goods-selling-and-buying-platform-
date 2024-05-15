@@ -1,0 +1,60 @@
+<main class="content">
+    <div class="container p-0">
+        <h1 class="h3 mb-3">Messages</h1>
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-12 col-lg-5 col-xl-3 border-right">
+                    <!-- Sidebar -->
+                    <div class="px-4 d-none d-md-block">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <input type="text" class="form-control my-3" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat List -->
+                    <div *ngIf="chatData && chatData.chats" class="list-group">
+                        <a *ngFor="let chat of chatData.chats  let i = index " href="javascript:void(0)" class="list-group-item list-group-item-action border-0"
+                            (click)="selectChat(chat , i)">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-grow-1 ml-3">
+                                    {{ chat.participant_name }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-7 col-xl-9">
+                    <!-- Chat Window -->
+                    <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                        <!-- Chat header -->
+                    </div>
+                    <div class="position-relative">
+                        <div class="chat-messages p-4">
+                            <div *ngIf="selectedChat && selectedChat.messages && selectedChat.messages.length > 0">
+                                <div *ngFor="let message of selectedChat.messages">
+                                    <div class="chat-message" [ngClass]="{'chat-message-left': message.sender !== 'You', 'chat-message-right': message.sender === 'You'}">
+                                        <div>
+                                            <div *ngIf="message.sender !== 'You'" class="text-muted small text-nowrap mt-2">{{ selectedChat.participant_name }}</div>
+                                            <div class="flex-shrink-1 bg-light rounded py-2 px-3" [ngClass]="{'ml-3': message.sender !== 'You', 'mr-3': message.sender === 'You'}">
+                                                <div class="font-weight-bold mb-1">{{ message.sender }}</div>
+                                                {{ message.message }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Message Input -->
+                    <div class="flex-grow-0 py-3 px-4 border-top">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Type your message" [(ngModel)]="newMessage">
+                            <button class="btn btn-primary" (click)="sendMessage()" >Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
