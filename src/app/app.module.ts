@@ -29,6 +29,7 @@ import { FeedBackComponent } from './Components/feed-back/feed-back.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FiltersSidebarComponent,
     SearchComponent,
     FeedBackComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -72,6 +72,7 @@ export class AdvertisementService {
       description: ad.description,
       price: ad.price,
       status: 'Active',
+      imageURL:ad.imageURL,
       title: ad.title
     };
 
