@@ -17,6 +17,11 @@
           [src]="profileImageUrl"
           alt="Profile Image"
         />
+        <img
+        *ngIf="!profileImageUrl"
+        src="assets/default-profile.jpg"
+        alt="Default Profile Picture"
+      />
         <label for="fileInput" class="choose-file-button">Choose file</label>
       </div>
       
