@@ -13,6 +13,7 @@ import { UserAdsComponent } from './Components/user-ads/user-ads.component';
 import { AdsComponent } from './Components/ads/ads.component';
 import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-sidebar.component';
 import { FeedBackComponent } from './Components/feed-back/feed-back.component';
+import { AdDetailsComponent } from './ad-details/ad-details/ad-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'MyAds', component: UserAdsComponent, data: { breadcrumb: 'My Ads' } },
   { path: 'ads/:category', component: AdsComponent, data: { breadcrumb: 'Ads' } },
   { path: 'filtersidebar', component: FiltersSidebarComponent, data: { breadcrumb: 'Filter Sidebar' } },
-  {path : 'FeedBack' , component : FeedBackComponent , data: { breadcrumb: 'FeedBack' }}
+  {path : 'FeedBack' , component : FeedBackComponent , data: { breadcrumb: 'FeedBack' }},
+  {path : 'ad-details' , component:AdDetailsComponent , data:{breadcrumb:'ad-details'}}
 ];
 
 

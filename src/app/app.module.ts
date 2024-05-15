@@ -29,8 +29,7 @@ import { FeedBackComponent } from './Components/feed-back/feed-back.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-
+import { AdDetailsComponent } from './ad-details/ad-details/ad-details.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +53,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     SearchComponent,
     FeedBackComponent,
     ConfirmationDialogComponent,
-    ProductDetailsComponent
+    AdDetailsComponent
   ],
   imports: [
     BrowserModule,
