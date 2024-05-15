@@ -10,6 +10,7 @@ import { AutheroizedUserService } from './Services/autheroized-user.service';
 export class AppComponent {
   title = 'SecondHandPlatform';
   showBreadcrumbAndSidebar: boolean = true;
+  isLoading: boolean = true;
 
   constructor(private router: Router, private authService: AutheroizedUserService) {
     this.router.events.subscribe(event => {

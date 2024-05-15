@@ -26,6 +26,10 @@ import { FiltersSidebarComponent } from './Components/filters-sidebar/filters-si
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SearchComponent } from './Components/search/search.component';
 import { FeedBackComponent } from './Components/feed-back/feed-back.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +51,8 @@ import { FeedBackComponent } from './Components/feed-back/feed-back.component';
     AdsComponent,
     FiltersSidebarComponent,
     SearchComponent,
-    FeedBackComponent
+    FeedBackComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +62,8 @@ import { FeedBackComponent } from './Components/feed-back/feed-back.component';
     AngularFireDatabaseModule, // Add AngularFireDatabaseModule here
     CommonModule,
     HttpClientModule, // Import HttpClientModule without .withFetch()
+    MatProgressSpinnerModule,
+    MatDialogModule
     
   ],
   providers: [],

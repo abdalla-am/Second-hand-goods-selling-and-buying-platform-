@@ -1,0 +1,37 @@
+.confirmation-dialog {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+  
+  .confirmation-dialog-header {
+    background-color: #2196F3;
+    color: white;
+    padding: 12px 24px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .confirmation-dialog-content {
+    padding: 24px;
+  }
+  
+  .confirmation-dialog-actions {
+    padding: 12px 24px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .confirmation-dialog-actions button {
+    margin-left: 8px;
+  }
+  
+  .confirmation-dialog-actions button:first-child {
+    margin-left: 0;
+  }
+  
