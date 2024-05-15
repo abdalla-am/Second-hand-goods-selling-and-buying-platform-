@@ -1,13 +1,28 @@
 <div class="feedback-list">
-    <div *ngFor="let item of feedback" class="feedback-item">
-      <div class="user-profile">
-        <img [src]="item.profilePic || 'assets/default-profile.jpg'" alt="Profile Picture">
-      </div>
-      <div class="feedback-details">
-        <h3>{{ item.userName }}</h3>
-        <p>{{ item.comment }}</p>
-        <p>Rating: {{ item.rating }}</p>
-      </div>
+  <div *ngFor="let item of feedback" class="feedback-item">
+    <div class="user-profile">
+      <!-- <img *ngIf="item.profilePic" [src]=" item.profilePic || 'assets/default-profile.jpg'" alt="Profile Picture"> -->
+      <img
+        *ngIf="item.profilePic"
+        [src]="item.profilePic || 'assets/default-profile.jpg'"
+        alt="Profile Picture"
+      />
+      <img
+        *ngIf="!item.profilePic"
+        src="assets/default-profile.jpg"
+        alt="Default Profile Picture"
+      />
+
+      <!-- <img
+        *ngIf="profileImageUrl"
+        [src]="profileImageUrl"
+        alt="Profile Image"
+      /> -->
+    </div>
+    <div class="feedback-details">
+      <h3>{{ item.userName }}</h3>
+      <p>{{ item.comment }}</p>
+      <p>Rating: {{ item.rating }}</p>
     </div>
   </div>
-  
+</div>
