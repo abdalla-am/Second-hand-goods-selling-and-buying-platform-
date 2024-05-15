@@ -42,7 +42,38 @@
 .clear-btn:hover {
   color: #0056b3;
 }
+.search-container {
+  display: flex;
+  justify-content: flex-end; /* Align search bar to the right */
+  margin-top: 20px; /* Adjust margin as needed */
+}
 
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-bar button {
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.search-bar button i {
+  font-size: 18px;
+}
 /* Section title styling */
 .FilterHeader {
   font-size: 20px;
