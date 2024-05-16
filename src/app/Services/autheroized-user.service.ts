@@ -35,15 +35,15 @@ export class AutheroizedUserService {
   async login(email: string, password: string): Promise<void> {
     try {
       const res = await this.fireauth.signInWithEmailAndPassword(email, password);
+      // Navigate to the home page first
+      this.router.navigate(['']);
+      this.loginError = false; // Reset loginError on successful login
       const userID = this.getLoggedInUserID();
       if (userID) {
         localStorage.setItem('userID', userID);
         this.userDataSubscription = this.userService.getUserData(userID).subscribe(data => {
           this.userData = data;
         });
-        // Navigate to the home page first
-        this.router.navigate(['/']);
-        this.loginError = false; // Reset loginError on successful login
       }
     } catch (err: any) {
       console.error('Login error:', err);
