@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { UsersService } from '../../Services/users.service';
 import { AutheroizedUserService } from '../../Services/autheroized-user.service';
+import { NotificationServiceService } from '../../Services/notification-service.service';
 
 @Component({
   selector: 'app-ad-details',
@@ -14,13 +15,15 @@ export class AdDetailsComponent {
   userData: any;
   userComment: string = '';
   userId: string = '';
-  userRating: number | undefined; // Added userRating property
+  userRating: number | undefined;
+  uName: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private adService: AdvertisementService,
     private userService: UsersService,
     private auth: AutheroizedUserService,
+    private notificationService: NotificationServiceService
   ) { }
 
   ngOnInit(): void {
@@ -65,15 +68,18 @@ export class AdDetailsComponent {
       rating: this.userRating
     };
 
-    // Call the method from UsersService to save feedback
     this.userService.saveFeedback(this.ad.authorID, feedbackObject)
       .then(() => {
-        console.log('Comment submitted and feedback updated successfully');
-        // Optionally, you can perform additional actions here
+        this.userService.getUserName(currentUser.uid).subscribe((name) => {
+          this.uName = name;
+          alert(this.uName); // Fixed alert call
+          console.log('Comment submitted and feedback updated successfully');
+          this.notificationService.addNotification(this.uName + ' commented on your ad ' + this.ad.title, this.ad.authorID);
+        });
       })
       .catch(error => {
         console.error('Error updating feedback:', error);
-        // Optionally, you can handle errors here
+        // Handle error...
       });
 
     // Clear the comment field and rating after submission

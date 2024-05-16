@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AutheroizedUserService } from '../../Services/autheroized-user.service';
 import { Router } from '@angular/router';
-import { UsersService } from '../../Services/users.service';
+import { NotificationServiceService } from '../../Services/notification-service.service';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +11,11 @@ import { UsersService } from '../../Services/users.service';
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false; // Initialize authentication status
   isProfileMenuVisible: boolean = false;
+  isNotificationVisible: boolean = false;
 
-  constructor(private router: Router, private authService: AutheroizedUserService, private user: UsersService) {}
+  constructor(private router: Router, 
+    private authService: AutheroizedUserService, 
+    private notificationService: NotificationServiceService) {}
 
   ngOnInit() {
     // Subscribe to loggedInUser$ observable to get updates on authentication status
@@ -32,7 +35,15 @@ export class HeaderComponent implements OnInit {
   hideProfileMenu() {
     this.isProfileMenuVisible = false;
   }
+  showNotification() {
+    this.isNotificationVisible = true;
+    this.notificationService.showNotificationPopup();
+  }
 
+  hideNotification() {
+    this.isNotificationVisible = false;
+    this.notificationService.hideNotificationPopup();
+  }
   navigateToDashboard() {
     if (this.isAuthenticated) { // Check if user is authorized
       this.router.navigateByUrl('/Dashboard'); // Navigate to Dashboard if authorized
@@ -42,5 +53,4 @@ export class HeaderComponent implements OnInit {
     // Call the logout method from the authentication service
     this.authService.logout();
   }
-
 }

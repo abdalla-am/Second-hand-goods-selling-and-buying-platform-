@@ -14,7 +14,6 @@ import { HttpClient } from '@angular/common/http';
 export class UsersService {
 
   LoggedInUserData : any;
-  private baseUrl = 'https://second-hand-sellingandbuying-default-rtdb.firebaseio.com';
   constructor(private db: AngularFireDatabase , private http: HttpClient) {}
 
   getUserData(uid: string): Observable<any> {

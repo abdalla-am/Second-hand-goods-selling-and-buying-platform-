@@ -1,0 +1,6 @@
+<!-- notification.component.html -->
+<div *ngIf="notifications.length > 0" class="notification-container">
+  <div *ngFor="let notification of notifications" class="notification">
+    <p>{{ notification }}</p>
+  </div>
+</div>

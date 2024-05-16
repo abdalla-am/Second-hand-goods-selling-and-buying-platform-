@@ -36,8 +36,6 @@
     padding: 10px;
 }
 
-
-
 /* Font Awesome Icons Styling */
 
 /* Font Awesome icons */
@@ -72,6 +70,7 @@
     transform: scale(1.2);
     transition: transform 0.3s ease;
 }
+
 /* Profile icon container */
 .profile-icon-container {
     font-size: 24px;
@@ -93,7 +92,6 @@
     z-index: 5;
 }
 
-
 .menu-bar a {
     display: block;
     color: #333;
@@ -113,6 +111,7 @@
 .profile-icon:hover .fa-user {
     color: #2169cc; /* Change color on hover */
 }
+
 .fa-circle-plus {
     font-size: 24px; /* Adjust the icon size */
     color: #fff; /* Set the color of the circle plus icon */
@@ -127,3 +126,38 @@
     background-color: #1c5ca9; /* Change background color on hover */
 }
 
+/* Notification popup */
+.notification-popup {
+    position: absolute;
+    top: calc(100% + -20px); /* Adjust the distance from the bell icon */
+    right: 150px;
+    width: 450px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+    z-index: 999; /* Ensure it appears on top of other elements */
+}
+/* Show notification popup on hover */
+.fa-regular.fa-bell:hover + .notification-popup {
+    display: block;
+}
+
+.notification-menu {
+    position: relative;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification-menu:hover .notification-dropdown {
+    display: block;
+}

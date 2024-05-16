@@ -36,8 +36,8 @@
     <tbody>
       <tr *ngFor="let ad of filteredAds">
         <td>{{ ad.title }}</td>
-        <td>{{ ad.Date_created }}</td>
-        <td>{{ ad.price }}</td>
+        <td>{{ ad.Date_created | date:'dd-MM-yyyy'}}</td>
+        <td>{{ ad.price  | currency:'USD':'symbol':'1.2-2'}}</td>
         <td>{{ ad.Category }}</td>
         <td [style.color]="ad.status === 'Active' ? 'green' : 'red'">{{ ad.status }}</td>
         <td>

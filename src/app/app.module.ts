@@ -30,6 +30,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AdDetailsComponent } from './Components/ad-details/ad-details.component';
+import { NotificationComponent } from './Components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AdDetailsComponent } from './Components/ad-details/ad-details.component
     SearchComponent,
     FeedBackComponent,
     ConfirmationDialogComponent,
-    AdDetailsComponent
+    AdDetailsComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

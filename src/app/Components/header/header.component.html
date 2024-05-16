@@ -24,19 +24,25 @@
                 </div>
                 <div class="col-lg-4 d-flex justify-content-end align-items-center">
                     <div *ngIf="isAuthenticated">
-                        <i class="fa-regular fa-bell"></i>
-                        <i class="fa-solid fa-envelope"></i>
+                        <i class="fa-regular fa-bell" (mouseenter)="showNotification()" (mouseleave)="hideNotification()"></i>
+                        <div class="notification-popup">
+                            <!-- Add your notification content here -->
+                            <app-notification></app-notification>
+                        </div>
+                        <a routerLink="/Messages" routerLinkActive="active-link">
+                            <i class="fa-solid fa-envelope" ></i>
+                        </a>
                         <a routerLink="/NewPost" routerLinkActive="active-link">
                             <i class="fa-solid fa-circle-plus"></i>
-                          </a>
+                        </a>
                     </div>
-                    <div class="d-flex search-form" >
+                    <div class="d-flex search-form">
                     </div>
                     <div class="profile-icon-container" (mouseenter)="showProfileMenu()" (mouseleave)="hideProfileMenu()" *ngIf="isAuthenticated">
                         <i class="fa-regular fa-user"></i>
-                        <div class="menu-bar" *ngIf="isProfileMenuVisible">
+                        <div class="menu-bar">
                             <!-- Add menu items here -->
-                            <a (click)="navigateToDashboard()" >My Profile</a>
+                            <a (click)="navigateToDashboard()">My Profile</a>
                             <a (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</a>
                         </div>
                     </div>
