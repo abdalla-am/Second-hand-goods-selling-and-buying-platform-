@@ -29,7 +29,7 @@ import { FeedBackComponent } from './Components/feed-back/feed-back.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AdDetailsComponent } from './ad-details/ad-details/ad-details.component';
+import { AdDetailsComponent } from './Components/ad-details/ad-details.component';
 
 @NgModule({
   declarations: [

@@ -51,7 +51,7 @@
   </div>
   
   <div class="ad-grid">
-    <div class="ad-container" *ngFor="let ad of pagedAds; let i = index">
+    <div class="ad-container" *ngFor="let ad of pagedAds; let i = index" (click)="goToAdDetails(ad.id)">
       <div class="ad-card">
         <div class="ad-details">
           <img [src]="ad.imageURL" alt="Ad Image" class="ad-image" />

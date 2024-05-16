@@ -1,0 +1,163 @@
+/* Container for the ad details */
+.ad-details-container {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* Image container */
+.ad-image {
+  flex: 0 0 40%;
+  overflow: hidden;
+  border-radius: 16px 0 0 16px;
+}
+
+.ad-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Info container */
+.ad-info {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 0 16px 16px 0;
+}
+
+/* Title */
+.ad-info h2 {
+  font-size: 2em;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+/* Price */
+.ad-price {
+  font-size: 1.5em;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+/* Description */
+.ad-description {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Meta */
+.ad-meta {
+  margin-bottom: 20px;
+}
+
+.ad-meta p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* User Details */
+.user-details {
+  margin-top: 20px;
+}
+
+.user-details h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  margin: 5px 0;
+  color: #666;
+}
+/* User Details */
+.user-details {
+  margin-top: 20px;
+}
+
+.user-details h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Comment Field */
+.user-details textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.user-details textarea::placeholder {
+  color: #999;
+}
+/* Button Styles */
+.user-details button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.user-details button:hover {
+  background-color: #45a049; /* Darker shade on hover */
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.comment-section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.comment-section textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.comment-section input[type="number"] {
+  width: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.comment-section button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.comment-section button:hover {
+  background-color: #0056b3;
+}
+

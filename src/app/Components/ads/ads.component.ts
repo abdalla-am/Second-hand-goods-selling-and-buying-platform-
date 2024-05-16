@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { AdvertisementService } from '../../Services/advertisement.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../Services/categories.service';
 import { SearchComponent } from '../search/search.component';
 import { SearchService } from '../../Services/search.service';
@@ -31,6 +31,7 @@ export class AdsComponent implements OnInit, OnChanges {
   Allusers : any;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private adService: AdvertisementService,
     private categoryService: CategoriesService,
@@ -86,7 +87,10 @@ export class AdsComponent implements OnInit, OnChanges {
       this.setPage(1);
     });
   }
-
+    // Method to navigate to ad details page
+    goToAdDetails(adId: string): void {
+      this.router.navigate(['/ad', adId]); // Navigate to '/ad/:id' route
+    }
   ngOnChanges(): void {
     const searchTextLower = this.searchText.toLowerCase();
     if (this.searchText) {
