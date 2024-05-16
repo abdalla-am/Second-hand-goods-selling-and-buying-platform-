@@ -61,7 +61,9 @@
             <p class="ad-description">{{ ad.description }}</p>
             <p class="ad-price">{{ ad.price }}</p>
             <p class="ad-category">{{ ad.category }}</p>
-            <i class="fa-regular fa-heart ad-favorite-icon" [ngClass]="{'favorited': ad.favorite}" (click)="toggleFavorite(ad)"></i>
+            <div class="favorite-container" (click)="$event.stopPropagation(); toggleFavorite(ad)">
+              <i class="fa-regular fa-heart ad-favorite-icon" [ngClass]="{'favorited': ad.favorite}"></i>
+            </div>
           </div>
         </div>
       </div>
