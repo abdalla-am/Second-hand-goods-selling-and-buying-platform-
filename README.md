@@ -79,10 +79,10 @@
 <h2 id="installation">Installation</h2>
 <ol>
     <li>Clone the repository from GitHub:
-        <pre><code>git clone https://github.com/your-username/second-hand-goods-platform.git</code></pre>
+        <pre><code>git clone https://github.com/abdalla-am/Second-hand-goods-selling-and-buying-platform-.git</code></pre>
     </li>
     <li>Navigate to the project directory:
-        <pre><code>cd second-hand-goods-platform</code></pre>
+        <pre><code>cd Second-hand-goods-selling-and-buying-platform-</code></pre>
     </li>
     <li>Install the dependencies:
         <pre><code>npm install</code></pre>
